@@ -25,9 +25,18 @@ public class Feature6 {
         System.out.println("\n--- Feature 6: Top N Populated Countries in a Region ---");
 
         System.out.print("Enter Region name (e.g., Southeast Asia, Western Europe, Caribbean): ");
+        if (!scanner.hasNextLine()) {
+            System.out.println("\nNo input stream available (non-interactive mode).");
+            return;
+        }
         String region = scanner.nextLine().trim();
 
         System.out.print("Enter N (Number of top populated countries to retrieve): ");
+        if (!scanner.hasNextLine()) {
+            System.out.println("\nNo input stream available for N.");
+            return;
+        }
+
         int limit;
         try {
             limit = Integer.parseInt(scanner.nextLine().trim());
