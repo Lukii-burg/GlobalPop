@@ -9,14 +9,39 @@ import java.sql.SQLException;
  */
 public class DatabaseConnection {
 
-    /** The JDBC connection URL for the local MySQL world database instance. */
-    private static final String URL = "jdbc:mysql://localhost:33061/world";
+    /**
+     * Database host.
+     *
+     * Defaults to localhost for local IntelliJ execution.
+     * Docker Compose sets this to "db".
+     */
+    private static final String HOST =
+            System.getenv().getOrDefault("DB_HOST", "localhost");
 
-    /** Database user credential. */
-    private static final String USER = "root";
+    /**
+     * Database port.
+     *
+     * Defaults to 33061 for local execution.
+     * Docker Compose sets this to 3306.
+     */
+    private static final String PORT =
+            System.getenv().getOrDefault("DB_PORT", "33061");
 
-    /** Database password credential. */
-    private static final String PASSWORD = "root";
+    /** Database name. */
+    private static final String DATABASE =
+            System.getenv().getOrDefault("DB_NAME", "world");
+
+    /** Database user. */
+    private static final String USER =
+            System.getenv().getOrDefault("DB_USER", "root");
+
+    /** Database password. */
+    private static final String PASSWORD =
+            System.getenv().getOrDefault("DB_PASSWORD", "root");
+
+    /** JDBC connection URL. */
+    private static final String URL =
+            "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
 
     /**
      * Utility private constructor to prevent instantiation.
@@ -31,7 +56,6 @@ public class DatabaseConnection {
      * @throws SQLException if a database access error occurs.
      */
     public static Connection getConnection() throws SQLException {
-        // Return a fresh database connection instance using configured credentials
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
