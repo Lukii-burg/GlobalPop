@@ -1,4 +1,3 @@
-FROM ubuntu:latest
 FROM eclipse-temurin:25-jre
 
 WORKDIR /app

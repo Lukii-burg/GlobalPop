@@ -1,11 +1,13 @@
 name: GlobalPop CI
 
-on: push
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
     name: Build GlobalPop
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -16,15 +18,13 @@ jobs:
         with:
           java-version: '25'
           distribution: 'temurin'
+          cache: maven
+
+      - name: Run Maven tests
+        run: mvn clean test
 
       - name: Build with Maven
-        run: mvn package
+        run: mvn clean package
 
       - name: Build Docker Image
         run: docker build -t globalpop .
-
-      - name: Run Docker Image
-        run: docker run --name globalpop-container globalpop
-
-      - name: View Logs
-        run: docker logs globalpop-container
