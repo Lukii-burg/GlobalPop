@@ -14,7 +14,7 @@ import java.util.List;
  * Class responsible for generating Feature 01 Report:
  * "All the countries in the world organized by largest population to smallest."
  */
-public class Feature01CountriesByPopulation {
+public class Feature1 {
 
     /**
      * Public wrapper method called from Main to execute and display the report.

@@ -17,7 +17,7 @@ import java.util.Scanner;
  *
  * N is provided by the user.
  */
-public class Feature4TopNCountries {
+public class Feature4 {
 
     /**
      * Runs the Top N Countries feature.

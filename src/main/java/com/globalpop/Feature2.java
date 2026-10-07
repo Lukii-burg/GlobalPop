@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Displays all countries in a selected continent,
  * ordered from largest population to smallest.
  */
-public class Feature2CountriesByContinentPopulation {
+public class Feature2 {
 
     /**
      * Runs Feature 2.
