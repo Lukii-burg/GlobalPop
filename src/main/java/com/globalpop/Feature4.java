@@ -18,18 +18,52 @@ import java.util.Scanner;
  * N is provided by the user.
  */
 public class Feature4 {
-
-    /**
-     * Runs the Top N Countries feature.
-     */
     public static void run() {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Get N from the user
         int n = getValidN(scanner);
 
-        // SQL query
+        /*
+         * If no console input is available, getValidN()
+         * returns -1 and the feature exits safely.
+         */
+        if (n <= 0) {
+            return;
+        }
+
+        try {
+
+            List<Country> countries =
+                    getTopPopulatedCountries(n);
+
+            displayReport(countries, n);
+
+        } catch (SQLException e) {
+
+            System.out.println();
+            System.out.println(
+                    "Database error: " + e.getMessage()
+            );
+        }
+    }
+
+    /**
+     * Retrieves the top N most populated countries
+     * from the database.
+     *
+     * Countries are ordered from largest population
+     * to smallest population.
+     */
+    public static List<Country> getTopPopulatedCountries(
+            int n) throws SQLException {
+
+        if (n <= 0) {
+            throw new IllegalArgumentException(
+                    "Number of countries must be greater than zero."
+            );
+        }
+
         String sql = """
                 SELECT
                     c.Code,
@@ -45,27 +79,23 @@ public class Feature4 {
                 LIMIT ?
                 """;
 
-        // Store the countries returned from the database
         List<Country> countries = new ArrayList<>();
 
         try (
-                // Use the existing database connection class
                 Connection connection =
                         DatabaseConnection.getConnection();
 
-                // Prepare SQL statement
                 PreparedStatement statement =
                         connection.prepareStatement(sql)
         ) {
 
-            // Set the user's N value
             statement.setInt(1, n);
 
-            // Run the SQL query
-            try (ResultSet resultSet =
-                         statement.executeQuery()) {
+            try (
+                    ResultSet resultSet =
+                            statement.executeQuery()
+            ) {
 
-                // Read each country from the database
                 while (resultSet.next()) {
 
                     Country country = new Country();
@@ -94,29 +124,16 @@ public class Feature4 {
                             resultSet.getString("Capital")
                     );
 
-                    // Add Country object to the list
                     countries.add(country);
                 }
             }
-
-            // Display the report
-            displayReport(countries, n);
-
-        } catch (SQLException e) {
-
-            System.out.println();
-            System.out.println(
-                    "Database error: " + e.getMessage()
-            );
         }
-    }
 
+        return countries;
+    }
 
     /**
      * Gets a valid positive N from the user.
-     *
-     * @param scanner Scanner used to read user input.
-     * @return A positive integer.
      */
     private static int getValidN(Scanner scanner) {
 
@@ -126,9 +143,24 @@ public class Feature4 {
                     "Enter the number of top countries (N): "
             );
 
-            if (scanner.hasNextInt()) {
+            /*
+             * GitHub Actions does not provide interactive
+             * keyboard input to the Docker container.
+             */
+            if (!scanner.hasNextLine()) {
 
-                int n = scanner.nextInt();
+                System.out.println(
+                        "No input available."
+                );
+
+                return -1;
+            }
+
+            String input = scanner.nextLine().trim();
+
+            try {
+
+                int n = Integer.parseInt(input);
 
                 if (n > 0) {
                     return n;
@@ -138,24 +170,17 @@ public class Feature4 {
                         "N must be greater than 0."
                 );
 
-            } else {
+            } catch (NumberFormatException e) {
 
                 System.out.println(
                         "Please enter a valid number."
                 );
-
-                // Remove invalid input
-                scanner.next();
             }
         }
     }
 
-
     /**
      * Displays the country report.
-     *
-     * @param countries List of countries.
-     * @param n Number requested by the user.
      */
     private static void displayReport(
             List<Country> countries,
@@ -176,8 +201,6 @@ public class Feature4 {
                 "=============================================================="
         );
 
-
-        // Table headings
         System.out.printf(
                 "%-5s %-30s %-18s %-30s %-15s %-20s%n",
                 "Code",
@@ -188,33 +211,37 @@ public class Feature4 {
                 "Capital"
         );
 
-
         System.out.println(
                 "----------------------------------------------------------------------------------------------------------------"
         );
 
+        if (countries.isEmpty()) {
 
-        // Display each Country object
-        for (Country country : countries) {
-
-            String capital = country.getCapital();
-
-            // Handle missing capital
-            if (capital == null) {
-                capital = "N/A";
-            }
-
-            System.out.printf(
-                    "%-5s %-30s %-18s %-30s %-15d %-20s%n",
-                    country.getCode(),
-                    country.getName(),
-                    country.getContinent(),
-                    country.getRegion(),
-                    country.getPopulation(),
-                    capital
+            System.out.println(
+                    "No countries found."
             );
-        }
 
+        } else {
+
+            for (Country country : countries) {
+
+                String capital = country.getCapital();
+
+                if (capital == null || capital.isBlank()) {
+                    capital = "N/A";
+                }
+
+                System.out.printf(
+                        "%-5s %-30s %-18s %-30s %-15d %-20s%n",
+                        country.getCode(),
+                        country.getName(),
+                        country.getContinent(),
+                        country.getRegion(),
+                        country.getPopulation(),
+                        capital
+                );
+            }
+        }
 
         System.out.println();
 
