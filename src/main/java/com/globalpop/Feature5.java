@@ -12,17 +12,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Feature5 {
-
-    /**
-     * Runs Feature 5.
-     * Gets the continent and number of countries from the user.
-     */
     public void run() {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Ask user for continent
         System.out.print("Enter continent: ");
+
+        if (!scanner.hasNextLine()) {
+            System.out.println("No input available.");
+            return;
+        }
+
         String continent = scanner.nextLine().trim();
 
         if (continent.isBlank()) {
@@ -30,7 +30,6 @@ public class Feature5 {
             return;
         }
 
-        // Ask user for number of countries
         int limit = getValidLimit(scanner);
 
         try {
@@ -62,10 +61,18 @@ public class Feature5 {
                     "Enter the number of top countries: "
             );
 
-            if (scanner.hasNextInt()) {
+            if (!scanner.hasNextLine()) {
+                System.out.println(
+                        "No input available."
+                );
+                return 10;
+            }
 
-                int limit = scanner.nextInt();
-                scanner.nextLine();
+            String input = scanner.nextLine().trim();
+
+            try {
+
+                int limit = Integer.parseInt(input);
 
                 if (limit > 0) {
                     return limit;
@@ -75,13 +82,11 @@ public class Feature5 {
                         "Number must be greater than zero."
                 );
 
-            } else {
+            } catch (NumberFormatException e) {
 
                 System.out.println(
                         "Please enter a valid number."
                 );
-
-                scanner.nextLine();
             }
         }
     }
@@ -135,8 +140,10 @@ public class Feature5 {
             statement.setString(1, continent);
             statement.setInt(2, limit);
 
-            try (ResultSet resultSet =
-                         statement.executeQuery()) {
+            try (
+                    ResultSet resultSet =
+                            statement.executeQuery()
+            ) {
 
                 while (resultSet.next()) {
 
@@ -208,7 +215,7 @@ public class Feature5 {
 
                 String capital = country.getCapital();
 
-                if (capital == null) {
+                if (capital == null || capital.isBlank()) {
                     capital = "N/A";
                 }
 
