@@ -19,13 +19,19 @@ import java.util.Scanner;
 public class Feature2 {
 
     /**
-     * Runs Feature 2.
+     * Runs Feature 2 using interactive user input.
      */
     public void run() {
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter continent: ");
+
+        if (!scanner.hasNextLine()) {
+            System.out.println("No input available.");
+            return;
+        }
+
         String continent = scanner.nextLine().trim();
 
         if (continent.isBlank()) {
@@ -33,18 +39,29 @@ public class Feature2 {
             return;
         }
 
-        List<Country> countries = getCountriesByContinent(continent);
+        try {
 
-        displayReport(continent, countries);
+            List<Country> countries =
+                    getCountriesByContinent(continent);
+
+            displayReport(continent, countries);
+
+        } catch (SQLException e) {
+
+            System.out.println(
+                    "Database error: " + e.getMessage()
+            );
+        }
     }
 
-    /**
-     * Retrieves countries belonging to the selected continent.
-     *
-     * @param continent continent name
-     * @return countries ordered by population descending
-     */
-    private List<Country> getCountriesByContinent(String continent) {
+    public List<Country> getCountriesByContinent(
+            String continent) throws SQLException {
+
+        if (continent == null || continent.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Continent cannot be empty."
+            );
+        }
 
         List<Country> countries = new ArrayList<>();
 
@@ -55,10 +72,10 @@ public class Feature2 {
                     c.Continent,
                     c.Region,
                     c.Population,
-                    city.Name AS Capital
+                    capital.Name AS Capital
                 FROM country c
-                LEFT JOIN city
-                    ON c.Capital = city.ID
+                LEFT JOIN city AS capital
+                    ON c.Capital = capital.ID
                 WHERE c.Continent = ?
                 ORDER BY c.Population DESC
                 """;
@@ -73,8 +90,10 @@ public class Feature2 {
 
             statement.setString(1, continent);
 
-            try (ResultSet resultSet =
-                         statement.executeQuery()) {
+            try (
+                    ResultSet resultSet =
+                            statement.executeQuery()
+            ) {
 
                 while (resultSet.next()) {
 
@@ -90,12 +109,6 @@ public class Feature2 {
                     countries.add(country);
                 }
             }
-
-        } catch (SQLException e) {
-
-            System.out.println(
-                    "Database error: " + e.getMessage()
-            );
         }
 
         return countries;
@@ -103,9 +116,6 @@ public class Feature2 {
 
     /**
      * Displays the Feature 2 report.
-     *
-     * @param continent selected continent
-     * @param countries countries returned from database
      */
     private void displayReport(
             String continent,
@@ -152,7 +162,7 @@ public class Feature2 {
 
                 String capital = country.getCapital();
 
-                if (capital == null) {
+                if (capital == null || capital.isBlank()) {
                     capital = "N/A";
                 }
 
@@ -176,5 +186,11 @@ public class Feature2 {
                 "Total Countries Listed: %d%n",
                 countries.size()
         );
+
+        System.out.println(
+                "Report completed successfully."
+        );
+
+        System.out.println();
     }
 }
