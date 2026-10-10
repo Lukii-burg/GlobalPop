@@ -1,4 +1,4 @@
-package com.globalpop;
+package com.globalpop.sprint1_features;
 
 import com.globalpop.database.DatabaseConnection;
 import com.globalpop.model.Country;
@@ -11,7 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Feature5 {
+/**
+ * Feature 2:
+ * Displays all countries in a selected continent,
+ * ordered from largest population to smallest.
+ */
+public class Feature2 {
+
+    /**
+     * Runs Feature 2 using interactive user input.
+     */
     public void run() {
 
         Scanner scanner = new Scanner(System.in);
@@ -26,21 +35,16 @@ public class Feature5 {
         String continent = scanner.nextLine().trim();
 
         if (continent.isBlank()) {
-            System.out.println("Continent is required.");
+            System.out.println("Continent cannot be empty.");
             return;
         }
-
-        int limit = getValidLimit(scanner);
 
         try {
 
             List<Country> countries =
-                    getTopPopulatedCountriesInContinent(
-                            continent,
-                            limit
-                    );
+                    getCountriesByContinent(continent);
 
-            displayReport(continent, countries, limit);
+            displayReport(continent, countries);
 
         } catch (SQLException e) {
 
@@ -50,84 +54,31 @@ public class Feature5 {
         }
     }
 
-    /**
-     * Gets a valid positive number from the user.
-     */
-    private int getValidLimit(Scanner scanner) {
-
-        while (true) {
-
-            System.out.print(
-                    "Enter the number of top countries: "
-            );
-
-            if (!scanner.hasNextLine()) {
-                System.out.println(
-                        "No input available."
-                );
-                return 10;
-            }
-
-            String input = scanner.nextLine().trim();
-
-            try {
-
-                int limit = Integer.parseInt(input);
-
-                if (limit > 0) {
-                    return limit;
-                }
-
-                System.out.println(
-                        "Number must be greater than zero."
-                );
-
-            } catch (NumberFormatException e) {
-
-                System.out.println(
-                        "Please enter a valid number."
-                );
-            }
-        }
-    }
-
-    /**
-     * Gets the top populated countries in the selected continent.
-     */
-    public List<Country> getTopPopulatedCountriesInContinent(
-            String continent,
-            int limit
-    ) throws SQLException {
+    public List<Country> getCountriesByContinent(
+            String continent) throws SQLException {
 
         if (continent == null || continent.isBlank()) {
             throw new IllegalArgumentException(
-                    "Continent is required."
+                    "Continent cannot be empty."
             );
         }
 
-        if (limit <= 0) {
-            throw new IllegalArgumentException(
-                    "Number of countries must be greater than zero."
-            );
-        }
+        List<Country> countries = new ArrayList<>();
 
         String sql = """
                 SELECT
-                    country.Code,
-                    country.Name,
-                    country.Continent,
-                    country.Region,
-                    country.Population,
+                    c.Code,
+                    c.Name,
+                    c.Continent,
+                    c.Region,
+                    c.Population,
                     capital.Name AS Capital
-                FROM country
+                FROM country c
                 LEFT JOIN city AS capital
-                    ON country.Capital = capital.ID
-                WHERE country.Continent = ?
-                ORDER BY country.Population DESC
-                LIMIT ?
+                    ON c.Capital = capital.ID
+                WHERE c.Continent = ?
+                ORDER BY c.Population DESC
                 """;
-
-        List<Country> countries = new ArrayList<>();
 
         try (
                 Connection connection =
@@ -138,7 +89,6 @@ public class Feature5 {
         ) {
 
             statement.setString(1, continent);
-            statement.setInt(2, limit);
 
             try (
                     ResultSet resultSet =
@@ -147,16 +97,16 @@ public class Feature5 {
 
                 while (resultSet.next()) {
 
-                    countries.add(
-                            new Country(
-                                    resultSet.getString("Code"),
-                                    resultSet.getString("Name"),
-                                    resultSet.getString("Continent"),
-                                    resultSet.getString("Region"),
-                                    resultSet.getLong("Population"),
-                                    resultSet.getString("Capital")
-                            )
+                    Country country = new Country(
+                            resultSet.getString("Code"),
+                            resultSet.getString("Name"),
+                            resultSet.getString("Continent"),
+                            resultSet.getString("Region"),
+                            resultSet.getLong("Population"),
+                            resultSet.getString("Capital")
                     );
+
+                    countries.add(country);
                 }
             }
         }
@@ -165,13 +115,11 @@ public class Feature5 {
     }
 
     /**
-     * Displays the report.
+     * Displays the Feature 2 report.
      */
     private void displayReport(
             String continent,
-            List<Country> countries,
-            int limit
-    ) {
+            List<Country> countries) {
 
         System.out.println();
 
@@ -180,8 +128,7 @@ public class Feature5 {
         );
 
         System.out.printf(
-                " TOP %d MOST POPULATED COUNTRIES IN %s%n",
-                limit,
+                " COUNTRIES IN %s (LARGEST TO SMALLEST POPULATION)%n",
                 continent.toUpperCase()
         );
 
@@ -190,7 +137,7 @@ public class Feature5 {
         );
 
         System.out.printf(
-                "%-6s %-35s %-18s %-26s %-15s %-22s%n",
+                "%-6s %-38s %-18s %-26s %-15s %-22s%n",
                 "CODE",
                 "NAME",
                 "CONTINENT",
@@ -220,7 +167,7 @@ public class Feature5 {
                 }
 
                 System.out.printf(
-                        "%-6s %-35s %-18s %-26s %,15d %-22s%n",
+                        "%-6s %-38s %-18s %-26s %,15d %-22s%n",
                         country.getCode(),
                         country.getName(),
                         country.getContinent(),
@@ -236,7 +183,7 @@ public class Feature5 {
         );
 
         System.out.printf(
-                "Countries displayed: %d%n",
+                "Total Countries Listed: %d%n",
                 countries.size()
         );
 

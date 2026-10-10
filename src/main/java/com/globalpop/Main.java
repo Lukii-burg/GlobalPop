@@ -1,5 +1,7 @@
 package com.globalpop;
 
+import com.globalpop.sprint1_features.*;
+
 public class Main {
 
     public static void main(String[] args) {
