@@ -52,5 +52,8 @@ public class Main {
 
 //        Feature16 feature16 = new Feature16();
 //        feature16.run();
+
+//        Feature8 feature8 = new Feature8();
+//        feature8.run();
     }
 }
