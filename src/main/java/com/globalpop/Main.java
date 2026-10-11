@@ -31,7 +31,7 @@ public class Main {
 //
 //        Feature6 feature6 = new Feature6();
 //        feature6.execute();
-
+//
 //        // Feature 7
 //        Feature7 feature07 = new Feature7();
 //        feature07.generateAndDisplayReport();
@@ -39,21 +39,27 @@ public class Main {
 //        // Feature 14
 //        Feature14 feature14 = new Feature14();
 //        feature14.generateAndDisplayReport();
-
+//
 //        // Feature 20
 //        Feature20 feature20 = new Feature20();
 //        feature20.generateAndDisplayReport();
-
+//
 //        Feature22 feature22 = new Feature22();
 //        feature22.run();
-
+//
 //        Feature12 feature12 = new Feature12();
 //        feature12.run();
-
+//
 //        Feature16 feature16 = new Feature16();
 //        feature16.run();
-
+//
 //        Feature8 feature8 = new Feature8();
 //        feature8.run();
+//
+//        Feature10 feature10 = new Feature10();
+//        feature10.generateAndDisplayReport();
+//
+//        Feature17 feature17 = new Feature17();
+//        feature17.generateAndDisplayReport();
     }
 }
