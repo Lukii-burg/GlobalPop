@@ -30,7 +30,7 @@ The World Database is the external data source used by GlobalPop. It stores info
 When the Data Analyst requests a report, the system retrieves the relevant information from the database, processes the data, and displays the report.
 
 ## 3. Main Use Cases
-![Use Case Diagram](Use_Case.png)
+![Use Case Diagram](Use_Case_Diagram.png)
 
 ### 3.1 Country Reports
 
