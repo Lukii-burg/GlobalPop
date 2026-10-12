@@ -1,4 +1,4 @@
-package com.globalpop;
+package com.globalpop.sprint1_features;
 
 import com.globalpop.database.DatabaseConnection;
 import com.globalpop.model.Country;
@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Feature4 {
     public static void run() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         int n = getValidN(scanner);
 
