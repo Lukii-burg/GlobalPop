@@ -88,9 +88,6 @@ public class Feature13 {
         return cities;
     }
 
-    /**
-     * Prints the formatted report for top cities in the continent.
-     */
     private void displayReport(List<City> cities, String continent, int limit) {
         if (cities.isEmpty()) {
             System.out.println("\nNo cities found for continent: \"" + continent + "\"");
@@ -98,7 +95,28 @@ public class Feature13 {
         }
 
         System.out.println("\n==========================================================================================");
-        System.out.printf(" TOP %d POPULATED CITIES IN CONTINENT: %s%n", limit, continent.toUpperCase());
+        System.out.printf(" TOP %d POPULATED CITIES IN CONTINENT: %s%n",
+                limit, continent.toUpperCase());
         System.out.println("==========================================================================================");
-        System.out.printf("%-25s | %-25s | %-20s | %-15s%n", "City", "Country", "District", "Population");
-        System.out.println("------------------------------------------------------------------------------------------");}}
+
+        System.out.printf("%-25s | %-25s | %-20s | %15s%n",
+                "City", "Country", "District", "Population");
+
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        int rank = 1;
+
+        for (City city : cities) {
+            System.out.printf("%-25s | %-25s | %-20s | %,15d%n",
+                    city.getCityName(),
+                    city.getCountry(),
+                    city.getDistrict(),
+                    city.getPopulation());
+
+            rank++;
+        }
+
+        System.out.println("==========================================================================================");
+        System.out.printf("Total cities displayed: %d%n", cities.size());
+    }
+}

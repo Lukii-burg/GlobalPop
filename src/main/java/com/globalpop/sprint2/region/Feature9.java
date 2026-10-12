@@ -24,7 +24,7 @@ public class Feature9 {
         // Read the region name from the user.
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter region name: ");
+        System.out.print("Enter region name: (e.g., Southeast Asia, Western Europe, Caribbean):");
         String region = scanner.nextLine().trim();
 
         // Check that the region name is not empty.
