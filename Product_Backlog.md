@@ -35,16 +35,18 @@ This document contains the list of user stories and tasks for the Population Rep
 2. As a data analyst, I want to view the total population, population living in cities, and population not living in cities for each region so that I can analyze urbanization trends at region level.
 3. As a data analyst, I want to view the total population, population living in cities, and population not living in cities for each country so that I can understand urbanization trends at country level.
 
-## 5. Language Report
-1. As a data analyst, I want to view a report showing the number of people who speak Chinese, English, Hindi, Spanish, and Arabic, sorted from greatest to smallest, including world population percentage so that I can understand major languages.
 
-## 6. General Population Lookups
+
+## 5. General Population Lookups
 1. As a data analyst, I want to know the total population of the world so that I can get a global population overview.
 2. As a data analyst, I want to know the total population of a continent so that I can get population data for a specific continent.
 3. As a data analyst, I want to know the total population of a region so that I can get population data for a specific region.
 4. As a data analyst, I want to know the total population of a country so that I can get population data for a specific country.
 5. As a data analyst, I want to know the total population of a district so that I can get population data for a local area.
 6. As a data analyst, I want to know the total population of a city so that I can get population data for a specific city.
+
+## 6. Language Report
+1. As a data analyst, I want to view a report showing the number of people who speak Chinese, English, Hindi, Spanish, and Arabic, sorted from greatest to smallest, including world population percentage so that I can understand major languages.
 
 ---
 
