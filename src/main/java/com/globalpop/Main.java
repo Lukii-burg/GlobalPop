@@ -61,5 +61,11 @@ public class Main {
 //
 //        Feature17 feature17 = new Feature17();
 //        feature17.generateAndDisplayReport();
+//
+//        Feature11 feature11 = new Feature11();
+//        feature11.run();
+//
+//        Feature18 feature18 = new Feature18();
+//        feature18.run();
     }
 }
