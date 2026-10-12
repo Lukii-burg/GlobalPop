@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Feature10 {
     public void generateAndDisplayReport() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.print("Enter country name: ");
 

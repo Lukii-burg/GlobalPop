@@ -17,7 +17,7 @@ public class Feature16 {
      * Asks user for district and N, then prints the city report.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 16: Top N Populated Cities in a District ---");
 

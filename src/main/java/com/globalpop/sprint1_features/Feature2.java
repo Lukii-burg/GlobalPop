@@ -23,9 +23,9 @@ public class Feature2 {
      */
     public void run() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
-        System.out.print("Enter continent: ");
+        System.out.print("Enter continent(e.g Asia, Europe, Africa): ");
 
         if (!scanner.hasNextLine()) {
             System.out.println("No input available.");

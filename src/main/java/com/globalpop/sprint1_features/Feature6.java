@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Feature6 {
     public void execute() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println(
                 "\n--- Feature 6: Top N Populated Countries in a Region ---"

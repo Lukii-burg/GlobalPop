@@ -17,7 +17,7 @@ public class Feature19 {
      * User enters region and system prints all its capital cities sorted by population.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 19: All Capital Cities in a Region (Largest to Smallest) ---");
         System.out.print("Enter Region name (e.g., Southeast Asia, Western Europe, Caribbean): ");

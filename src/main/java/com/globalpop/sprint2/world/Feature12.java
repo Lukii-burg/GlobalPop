@@ -17,7 +17,7 @@ public class Feature12 {
      * Asks the user for N and prints the world city report.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 12: Top N Populated Cities in the World ---");
         System.out.print("Enter N (Number of top populated cities): ");

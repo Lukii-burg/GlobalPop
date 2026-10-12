@@ -17,7 +17,7 @@ public class Feature8 {
      * Asks user for a continent and prints all its cities by population.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 8: All Cities in a Continent (Largest to Smallest Population) ---");
         System.out.print("Enter Continent name (e.g Asia, Europe, Africa): ");

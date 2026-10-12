@@ -17,14 +17,14 @@ public class Feature21 {
     public void run() {
 
         // Read the continent and number of capital cities.
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println(
                 "\n=== Report 21: Top N Populated Capital Cities in a Continent ==="
         );
 
         // Get the continent name.
-        System.out.print("Enter continent name: ");
+        System.out.print("Enter continent name(e.g Asia, Europe, Africa): ");
 
         if (!scanner.hasNextLine()) {
             System.out.println("No input available. Please try again.");

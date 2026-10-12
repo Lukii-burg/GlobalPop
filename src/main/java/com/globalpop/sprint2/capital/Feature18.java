@@ -22,7 +22,7 @@ public class Feature18 {
      * Asks the user for a continent and displays its capital city report.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 18: All Capital Cities in a Continent (Largest to Smallest Population) ---");
         System.out.print("Enter Continent name (e.g., Asia, Europe, Africa): ");

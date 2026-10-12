@@ -22,7 +22,7 @@ public class Feature14 {
      * execute the database query, and display the report.
      */
     public void generateAndDisplayReport() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         // Prompt user to provide the region name safely using hasNextLine()
         System.out.print("Enter the region name (e.g., Western Europe, Caribbean): ");

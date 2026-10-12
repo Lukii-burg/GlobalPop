@@ -22,7 +22,7 @@ public class Feature15 {
     public void run() {
 
         // Read all user input as text to avoid Scanner newline problems.
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         // Ask for the country code, for example GBR.
         System.out.print("Enter country code (e.g. GBR): ");

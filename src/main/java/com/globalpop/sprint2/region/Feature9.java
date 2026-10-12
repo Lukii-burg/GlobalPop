@@ -22,7 +22,7 @@ public class Feature9 {
     public void run() {
 
         // Read the region name from the user.
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.print("Enter region name: (e.g., Southeast Asia, Western Europe, Caribbean):");
         String region = scanner.nextLine().trim();

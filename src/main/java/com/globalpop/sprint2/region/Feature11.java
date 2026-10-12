@@ -22,7 +22,7 @@ public class Feature11 {
      * Asks the user for a district and displays its city report.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 11: All Cities in a District (Largest to Smallest Population) ---");
         System.out.print("Enter District name (e.g., California, Noord-Holland, Île-de-France): ");

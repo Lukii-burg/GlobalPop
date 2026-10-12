@@ -17,7 +17,7 @@ public class Feature13 {
      * Asks user for continent and N, then prints the top populated cities report.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 13: Top N Populated Cities in a Continent ---");
 

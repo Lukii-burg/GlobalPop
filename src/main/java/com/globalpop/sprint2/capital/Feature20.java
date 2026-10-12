@@ -22,7 +22,7 @@ public class Feature20 {
      * execute the database query, and display the report.
      */
     public void generateAndDisplayReport() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         // Prompt user to provide N (number of top capital cities) safely using hasNextLine()
         System.out.print("Enter value for N (number of top populated capital cities to show): ");

@@ -20,7 +20,7 @@ public class Feature22 {
      * Executes Feature 22: Prompts user for inputs, queries database, and prints report.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
         System.out.println("\n--- Feature 22: Top N Populated Capital Cities in a Region ---");
 
