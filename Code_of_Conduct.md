@@ -53,19 +53,6 @@ Unacceptable behavior includes, but is not limited to:
 
 ---
 
-## 5. Formal Disciplinary & Dismissal Process
-
-In accordance with the **Module Disciplinary Procedures**, any breach of this Code of Conduct or failure to contribute may lead to formal dismissal from the team. Dismissal means the individual cannot deliver the coursework and will fail the assessment.
-
-### Dismissal Process Rules:
-1. **Evidence of Breach:** An individual is evidenced as breaching this Code of Conduct or consistently failing to contribute to deliverables.
-2. **Presentation of Evidence:** Formal evidence (GitHub metrics, commit history, Zube/Kanban activity, attendance records) is presented to a member of the module delivery team.
-3. **Right of Reply:** The individual will have the opportunity to evidence mitigating circumstances either to the team or privately to a member of the module delivery team.
-4. **Final Decision:** The module delivery team retains the sole right to make the final decision on whether dismissal is warranted.
-5. **Appeals:** Any dismissed member has **one week** to appeal the decision to the module team with suitable supporting evidence.
-
----
-
-## 6. Acknowledgment & Agreement
+## 5. Acknowledgment & Agreement
 
 By working on this project repository and participating in team activities, all members agree to abide by this Code of Conduct and support a productive, fair, and high-performing team environment.
