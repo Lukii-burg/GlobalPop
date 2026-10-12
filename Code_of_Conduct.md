@@ -23,11 +23,6 @@ All team members agree to uphold the following values:
 * **Code Quality:** All code submitted via Pull Requests (PRs) must be formatted, clean, commented, and verified to build with Maven before requesting review.
 * **Code Reviews:** No code should be merged into `develop` or `master` without peer review approval.
 
-### Code Review Meetings
-* **Punctuality & Readiness:** Members must arrive **on time** for all scheduled Code Review meetings with the module teaching team.
-* **Environment Setup:** Members must have their tools logged in (GitHub/Zube) and a building version of the project in IntelliJ ready to demonstrate.
-
-
 ---
 
 ## 3. Decision-Making & Conflict Resolution
