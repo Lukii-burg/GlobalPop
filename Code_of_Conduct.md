@@ -33,9 +33,9 @@ All team members agree to uphold the following values:
 * If consensus cannot be reached, decisions will be resolved by majority vote or delegated to the designated Scrum Lead / Project Lead.
 
 ### Conflict Resolution
-1. **Direct Communication:** Address initial concerns or misunderstandings directly and constructively with the involved member(s). Focus on the issue, not the person.
-2. **Team Mediation:** If unresolved, escalate the issue to the Scrum/Project Lead for informal mediation.
-3. **Lecturer Escalation:** If an internal resolution cannot be reached, the issue will be brought to the module teaching team (Kevin Sim) for formal guidance.
+* **Direct Communication:** Address initial concerns or misunderstandings directly and constructively with the involved member(s). Focus on the issue, not the person.
+* **Team Mediation:** If unresolved, escalate the issue to the Scrum/Project Lead for informal mediation.
+* **Lecturer Escalation:** If an internal resolution cannot be reached, the issue will be brought to the module teaching team (Kevin Sim) for formal guidance.
 
 ---
 
