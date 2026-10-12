@@ -44,7 +44,8 @@ public class Main {
 //
 //          Feature32 feature32 = new Feature32();
 //          feature32.generateAndDisplayReport();
-
-
+//
+//          Feature24 feature24 = new Feature24();
+//          feature24.generateAndDisplayReport();
     }
 }
