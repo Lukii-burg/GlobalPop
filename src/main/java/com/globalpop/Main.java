@@ -5,6 +5,7 @@ import com.globalpop.sprint2.capital.*;
 import com.globalpop.sprint2.region.*;
 import com.globalpop.sprint2.world.*;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -56,8 +57,14 @@ public class Main {
 //        Feature8 feature8 = new Feature8();
 //        feature8.run();
 //
+//        Feature9 feature9 = new Feature9();
+//        feature9.run();
+//
 //        Feature10 feature10 = new Feature10();
 //        feature10.generateAndDisplayReport();
+//
+//        Feature15 feature15 = new Feature15();
+//        feature15.generateAndDisplayReport();
 //
 //        Feature17 feature17 = new Feature17();
 //        feature17.generateAndDisplayReport();
@@ -67,5 +74,10 @@ public class Main {
 //
 //        Feature18 feature18 = new Feature18();
 //        feature18.run();
+//
+//        Feature21 feature21 = new Feature21();
+//        feature21.run();
+
+
     }
 }
