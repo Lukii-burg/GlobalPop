@@ -26,7 +26,7 @@ All team members agree to uphold the following values:
 ### Code Review Meetings
 * **Punctuality & Readiness:** Members must arrive **on time** for all scheduled Code Review meetings with the module teaching team.
 * **Environment Setup:** Members must have their tools logged in (GitHub/Zube) and a building version of the project in IntelliJ ready to demonstrate.
-* *Per Coursework Regulations:* Being late or unprepared caps the review mark at **40%**, while unexcused non-attendance results in a mark of **0%**.
+
 
 ---
 
