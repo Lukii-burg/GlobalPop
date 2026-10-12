@@ -1,4 +1,4 @@
-package com.globalpop;
+package com.globalpop.sprint1_features;
 
 import com.globalpop.database.DatabaseConnection;
 import com.globalpop.model.Country;
@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class Feature5 {
     public void run() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
 
-        System.out.print("Enter continent: ");
+        System.out.print("Enter continent(e.g Asia, Europe, Africa): ");
 
         if (!scanner.hasNextLine()) {
             System.out.println("No input available.");
