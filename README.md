@@ -14,12 +14,12 @@ GlobalPop is a Java-based population reporting system developed for the DevOps P
 
 | Matriculation Number | Code Review 1 | Code Review 2 |
 | :--- | :---: | :---: |
-| 40870389 (Aung Pyae Hein) | --% | --% |
-| 40841085 (Aung Htoo Lin) | --% | --% |
-| 40841086 (Saw Paul Mu Thaw) | --% | --% |
-| 40841080 (Thet Nyan Toe) | --% | --% |
-| 40870388 (Htet Paing Soe) | --% | --% |
-| 40870390 (Wai Hlyan Htut Aung) | --% | --% |
+| 40841080 (Thet Nyan Toe) | 18% | --% |
+| 40841085 (Aung Htoo Lin) | 18% | --% |
+| 40841086 (Saw Paul Mu Thaw) | 18% | --% |
+| 40870389 (Aung Pyae Hein) | 18% | --% |
+| 40870388 (Htet Paing Soe) | 18% | --% |
+| 40870390 (Wai Hlyan Htut Aung) | 10% | --% |
 | **Total** | **100%** | **100%** |
 
 ## Status Badges
@@ -44,7 +44,7 @@ The project generates reports on global, continental, and regional populations u
 
 ## Kanban Board
 
-You can follow our tasks and progress here: [Group 4 Backlog / Kanban Board](https://github.com/users/Aung-Htoo-Lin/projects/1)
+You can follow our tasks and progress here: [Group 4 Backlog / Kanban Board](https://zube.io/group-4-4/population-reporting-system/w/workspace-1/kanban)
 
 ## Documents
 
@@ -101,13 +101,3 @@ We welcome contributions from team members. Please ensure:
 | 20 | The top N populated capital cities in the world where N is provided by the user. | Yes | ![Screenshot](Report_Images/Report20.png) |
 | 21 | The top N populated capital cities in a continent where N is provided by the user. | Yes | ![Screenshot](Report_Images/Report21.png) |
 | 22 | The top N populated capital cities in a region where N is provided by the user. | Yes | ![Screenshot](Report_Images/Report22.png) |
-| 23 | The population of people, people living in cities, and people not living in cities in each continent. | Yes | N/A |
-| 24 | The population of people, people living in cities, and people not living in cities in each region. | Yes | N/A |
-| 25 | The population of people, people living in cities, and people not living in cities in each country. | Yes | N/A |
-| 26 | The population of the world. | Yes | N/A |
-| 27 | The population of a continent. | Yes | N/A |
-| 28 | The population of a region. | Yes | N/A |
-| 29 | The population of a country. | Yes | N/A |
-| 30 | The population of a district. | Yes | N/A |
-| 31 | The population of a city. | Yes | N/A |
-| 32 | Number of people who speak (from greatest to smallest) and percentage of world population for: Chinese, English, Hindi, Spanish, Arabic. | Yes | N/A |
