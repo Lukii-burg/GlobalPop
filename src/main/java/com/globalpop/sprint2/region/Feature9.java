@@ -77,7 +77,8 @@ public class Feature9 {
 
             // Display the report title and column names.
             System.out.println();
-            System.out.println("Cities in region: " + region);
+            System.out.println("=".repeat(100));
+            System.out.println("Report 9: Cities in region: " + region);
             System.out.println("=".repeat(100));
 
             System.out.printf(

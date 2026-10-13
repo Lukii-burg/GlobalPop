@@ -104,8 +104,9 @@ public class Feature15 {
 
             // Display the report.
             System.out.println();
+            System.out.println("=".repeat(100));
             System.out.println(
-                    "Top " + n + " populated cities in " + countryCode
+                    "Report 15: Top " + n + " populated cities in " + countryCode
             );
             System.out.println("=".repeat(100));
 

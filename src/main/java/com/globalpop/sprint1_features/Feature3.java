@@ -81,7 +81,7 @@ public class Feature3 {
 
     private static void displayReport(String region, List<Country> countries) {
         System.out.println("==========================================================================================");
-        System.out.printf(" Countries in '%s' (Largest to Smallest Population)%n", region);
+        System.out.printf("Report 3: Countries in '%s' (Largest to Smallest Population)%n", region);
         System.out.println("==========================================================================================");
         System.out.printf("%-6s | %-35s | %-15s | %-20s | %-12s | %-20s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
