@@ -10,17 +10,14 @@ GlobalPop is a Java-based population reporting system developed for the DevOps P
 - **Build Tool:** Maven
 - **Database:** MySQL
 
-## Contribution Spreadsheet
+## Team Members
 
-| Matriculation Number | Code Review 1 | Code Review 2 |
-| :--- | :---: | :---: |
-| 40841080 (Thet Nyan Toe) | 18 | |
-| 40841085 (Aung Htoo Lin) | 18 | |
-| 40841086 (Saw Paul Mu Thaw) | 18 | |
-| 40870389 (Aung Pyae Hein) | 18 | |
-| 40870388 (Htet Paing Soe) | 18 | |
-| 40870390 (Wai Hlyan Htut Aung) | 10 | |
-| **Total** | **100** | |
+- **40870389** – Aung Pyae Hein – Scrum Master
+- **40841085** – Aung Htoo Lin – Product Owner
+- **40841086** – Saw Paul Mu Thaw
+- **40841080** – Thet Nyan Toe
+- **40870388** – Htet Paing Soe
+- **40870390** – Wai Hlyan Htut Aung
 
 ---
 
@@ -38,27 +35,28 @@ The project generates reports on global, continental, and regional populations u
 
 You can follow our tasks and progress here: [Group 4 Backlog / Kanban Board](https://zube.io/group-4-4/population-reporting-system/w/workspace-1/kanban)
 
-## Contribution Guidelines
+---
 
-We welcome contributions from team members. Please ensure:
-- Code follows best practices and is properly documented.
-- Branch naming follows the `feature/`, `bugfix/`, or `hotfix/` convention.
-- Pull requests are reviewed before merging.
+## Contribution Spreadsheet
 
-## Team Members
+| Matriculation Number | Code Review 1 | Code Review 2 |
+| :--- | :---: | :---: |
+| 40841080 (Thet Nyan Toe) | 18 | |
+| 40841085 (Aung Htoo Lin) | 18 | |
+| 40841086 (Saw Paul Mu Thaw) | 18 | |
+| 40870389 (Aung Pyae Hein) | 18 | |
+| 40870388 (Htet Paing Soe) | 18 | |
+| 40870390 (Wai Hlyan Htut Aung) | 10 | |
+| **Total** | **100** | |
 
-- **40870389** – Aung Pyae Hein – Scrum Master
-- **40841085** – Aung Htoo Lin – Product Owner
-- **40841086** – Saw Paul Mu Thaw
-- **40841080** – Thet Nyan Toe
-- **40870388** – Htet Paing Soe
-- **40870390** – Wai Hlyan Htut Aung
+> **Note on Contribution Allocation:**  
+> The contribution percentage for Wai Hlyan Htut Aung (40870390) was adjusted to 10% due to persistent non-attendance at scheduled team meetings, frequent delay in completing assigned deliverables beyond agreed deadlines, and minimal active participation in overall collaborative project activities.
 
 ---
 
 ## Requirements Met
 
-32 requirements of 32 have been implemented, which is **100%**.
+22 requirements of 32 have been implemented, which is **68.75%**.
 
 | ID | Name | Met | Screenshot |
 | :--- | :--- | :---: | :--- |
