@@ -14,21 +14,13 @@ GlobalPop is a Java-based population reporting system developed for the DevOps P
 
 | Matriculation Number | Code Review 1 | Code Review 2 |
 | :--- | :---: | :---: |
-| 40841080 (Thet Nyan Toe) | 18% | --% |
-| 40841085 (Aung Htoo Lin) | 18% | --% |
-| 40841086 (Saw Paul Mu Thaw) | 18% | --% |
-| 40870389 (Aung Pyae Hein) | 18% | --% |
-| 40870388 (Htet Paing Soe) | 18% | --% |
-| 40870390 (Wai Hlyan Htut Aung) | 10% | --% |
-| **Total** | **100%** | **100%** |
-
-## Status Badges
-
-[![Master Build Status](https://github.com/Aung-Htoo-Lin/DevOpsLabs/actions/workflows/main.yml/badge.svg)](https://github.com/Aung-Htoo-Lin/DevOpsLabs/actions)
-[![Develop Build Status](https://github.com/Aung-Htoo-Lin/DevOpsLabs/actions/workflows/develop.yml/badge.svg)](https://github.com/Aung-Htoo-Lin/DevOpsLabs/actions)
-[![Code Coverage](https://img.shields.io/badge/coverage-85%25-green)](https://github.com/Aung-Htoo-Lin/DevOpsLabs)
-[![Release](https://img.shields.io/github/v/release/Aung-Htoo-Lin/DevOpsLabs?include_prereleases)](https://github.com/Aung-Htoo-Lin/DevOpsLabs/releases)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+| 40841080 (Thet Nyan Toe) | 18 | |
+| 40841085 (Aung Htoo Lin) | 18 | |
+| 40841086 (Saw Paul Mu Thaw) | 18 | |
+| 40870389 (Aung Pyae Hein) | 18 | |
+| 40870388 (Htet Paing Soe) | 18 | |
+| 40870390 (Wai Hlyan Htut Aung) | 10 | |
+| **Total** | **100** | |
 
 ---
 
@@ -45,15 +37,6 @@ The project generates reports on global, continental, and regional populations u
 ## Kanban Board
 
 You can follow our tasks and progress here: [Group 4 Backlog / Kanban Board](https://zube.io/group-4-4/population-reporting-system/w/workspace-1/kanban)
-
-## Documents
-
-You can also view the following key documents:
-- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
-- [Product Backlog](docs/PRODUCT_BACKLOG.md)
-- [Use Cases](docs/USE_CASES.md)
-- [Contribution Guidelines](docs/CONTRIBUTION_GUIDELINES.md)
-- [Security Policy](docs/SECURITY_POLICY.md)
 
 ## Contribution Guidelines
 
