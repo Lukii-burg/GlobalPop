@@ -23,7 +23,8 @@ public class Feature9 {
 
         // Read the region name from the user.
         Scanner scanner = com.globalpop.ConsoleInput.getScanner();
-
+        System.out.println("Report All City in a region");
+        System.out.println("===========================");
         System.out.print("Enter region name: (e.g., Southeast Asia, Western Europe, Caribbean):");
         String region = scanner.nextLine().trim();
 
