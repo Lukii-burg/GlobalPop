@@ -76,13 +76,13 @@ This document contains the list of user stories and tasks for the Population Rep
 | 20 | Capital City Reports | View top N most populated capital cities in the world | System displays top predefined N capital cities globally; sorted descending | 1 | 3 | Done |
 | 21 | Capital City Reports | View top N most populated capital cities in a continent | System displays top predefined N capital cities in each continent; sorted descending | 1 | 3 | Done |
 | 22 | Capital City Reports | View top N most populated capital cities in a region | System displays top predefined N capital cities in each region; sorted descending | 1 | 3 | Done |
-| 23 | Population Living In vs. Out of Cities | View population report for each continent | System displays total population, in cities, not in cities, % urban, % rural for each continent | 1 | 5 | Done |
-| 24 | Population Living In vs. Out of Cities | View population report for each region | System displays total population, in cities, not in cities, % urban, % rural for each region | 1 | 5 | Done |
-| 25 | Population Living In vs. Out of Cities | View population report for each country | System displays total population, in cities, not in cities, % urban, % rural for each country | 1 | 5 | Done |
+| 23 | Population Living In vs. Out of Cities | View population report for each continent | System displays total population, in cities, not in cities, % urban, % rural for each continent | 1 | 5 | In Progress |
+| 24 | Population Living In vs. Out of Cities | View population report for each region | System displays total population, in cities, not in cities, % urban, % rural for each region | 1 | 5 | In Progress |
+| 25 | Population Living In vs. Out of Cities | View population report for each country | System displays total population, in cities, not in cities, % urban, % rural for each country | 1 | 5 | In Progress |
 | 26 | General Population Lookups | View total population of the world | System displays total global population | 1 | 5 | In Progress |
 | 27 | General Population Lookups | View total population of a continent | System displays total population for each continent | 1 | 5 | In Progress |
 | 28 | General Population Lookups | View total population of a region | System displays total population for each region | 1 | 5 | In Progress |
 | 29 | General Population Lookups | View total population of a country | System displays total population for each country | 1 | 5 | In Progress |
 | 30 | General Population Lookups | View total population of a district | System displays total population for each district | 1 | 5 | In Progress |
 | 31 | General Population Lookups | View total population of a city | System displays total population for each city | 1 | 5 | In Progress |
-| 32 | Language Report | View number and % of speakers of Chinese, English, Hindi, Spanish, Arabic | System displays each language with total speakers and % of world population; sorted descending | 1 | 5 | Done |
+| 32 | Language Report | View number and % of speakers of Chinese, English, Hindi, Spanish, Arabic | System displays each language with total speakers and % of world population; sorted descending | 1 | 5 | In Progress |
