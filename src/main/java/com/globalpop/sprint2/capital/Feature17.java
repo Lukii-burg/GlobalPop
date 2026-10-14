@@ -16,7 +16,7 @@ public class Feature17 {
      */
         public void generateAndDisplayReport() {
             System.out.println("\n==============================================================");
-            System.out.println(" FEATURE 17: ALL CAPITAL CITIES IN THE WORLD");
+            System.out.println(" Report 17: ALL CAPITAL CITIES IN THE WORLD");
             System.out.println(" Ordered by Population: Largest to Smallest");
             System.out.println("==============================================================");
 

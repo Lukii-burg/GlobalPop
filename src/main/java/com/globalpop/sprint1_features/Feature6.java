@@ -213,7 +213,7 @@ public class Feature6 {
         );
 
         System.out.printf(
-                " TOP %d POPULATED COUNTRIES IN REGION: %s%n",
+                "Report 6: TOP %d POPULATED COUNTRIES IN REGION: %s%n",
                 limit,
                 region.toUpperCase()
         );

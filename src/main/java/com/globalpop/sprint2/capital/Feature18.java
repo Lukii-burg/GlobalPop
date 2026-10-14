@@ -102,7 +102,7 @@ public class Feature18 {
         }
 
         System.out.println("\n==========================================================================");
-        System.out.printf(" CAPITAL CITIES IN CONTINENT: %s (LARGEST TO SMALLEST POPULATION)%n",
+        System.out.printf("Report 18: CAPITAL CITIES IN CONTINENT: %s (LARGEST TO SMALLEST POPULATION)%n",
                 continent.toUpperCase());
         System.out.println("==========================================================================");
         System.out.printf("%-30s | %-25s | %-15s%n",

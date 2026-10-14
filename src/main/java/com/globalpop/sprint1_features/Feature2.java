@@ -128,7 +128,7 @@ public class Feature2 {
         );
 
         System.out.printf(
-                " COUNTRIES IN %s (LARGEST TO SMALLEST POPULATION)%n",
+                "Report 2: COUNTRIES IN %s (LARGEST TO SMALLEST POPULATION)%n",
                 continent.toUpperCase()
         );
 
