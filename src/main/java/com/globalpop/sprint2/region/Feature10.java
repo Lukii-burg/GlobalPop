@@ -35,7 +35,7 @@ public class Feature10 {
         }
 
         System.out.println("\n==============================================================");
-        System.out.println(" FEATURE 10: CITIES IN " + countryName.toUpperCase());
+        System.out.println(" Report 10: CITIES IN " + countryName.toUpperCase());
         System.out.println(" Ordered by Population: Largest to Smallest");
         System.out.println("==============================================================");
 

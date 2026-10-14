@@ -107,7 +107,7 @@ public class Feature22 {
         }
 
         System.out.println("\n==========================================================================");
-        System.out.printf(" TOP %d POPULATED CAPITAL CITIES IN REGION: %s%n", limit, region.toUpperCase());
+        System.out.printf("Report 22: TOP %d POPULATED CAPITAL CITIES IN REGION: %s%n", limit, region.toUpperCase());
         System.out.println("==========================================================================");
         System.out.printf("%-30s | %-25s | %-15s%n", "Capital City", "Country", "Population");
         System.out.println("--------------------------------------------------------------------------");

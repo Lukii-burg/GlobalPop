@@ -117,10 +117,12 @@ public class Feature21 {
             }
 
             // Display the report.
+            System.out.println("\n==========================================================================");
             System.out.println(
-                    "\nTop " + n
+                    "\n Report 21: Top " + n
                             + " populated capital cities in " + continent
             );
+            System.out.println("\n==========================================================================");
 
             System.out.printf(
                     "%-5s %-30s %-35s %15s%n",
