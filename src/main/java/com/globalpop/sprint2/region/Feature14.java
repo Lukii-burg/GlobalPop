@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class responsible for generating Feature 14 Report:
@@ -18,31 +17,13 @@ import java.util.Scanner;
 public class Feature14 {
 
     /**
-     * Public wrapper method called from Main to prompt the user for input,
-     * execute the database query, and display the report.
+     * Public wrapper method called from Main to execute and display the report.
+     * Uses hardcoded parameters instead of Scanner.
+     *
+     * @param region The geographic region name to filter by.
+     * @param n The maximum number of cities to display.
      */
-    public void generateAndDisplayReport() {
-        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
-
-        // Prompt user to provide the region name safely using hasNextLine()
-        System.out.print("Enter the region name (e.g., Western Europe, Caribbean): ");
-        String region = "";
-        if (scanner.hasNextLine()) {
-            region = scanner.nextLine().trim();
-        }
-
-        // Prompt user to provide N (number of top cities) safely using hasNextLine()
-        System.out.print("Enter value for N (number of top populated cities to show): ");
-        int n = 5; // Default fallback value
-        if (scanner.hasNextLine()) {
-            String input = scanner.nextLine().trim();
-            try {
-                n = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid number provided. Defaulting N to 5.");
-            }
-        }
-
+    public void generateAndDisplayReport(String region, int n) {
         // Print report header banner
         System.out.println("\n==================================================================================================");
         System.out.println(" REPORT 14: Top " + n + " Populated Cities in Region: " + region);
