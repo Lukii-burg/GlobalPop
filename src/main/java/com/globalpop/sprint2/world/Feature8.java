@@ -9,34 +9,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Feature8 {
 
+    // Default hardcoded value
+    private static final String DEFAULT_CONTINENT = "Asia";
+
     /**
-     * Asks user for a continent and prints all its cities by population.
+     * Runs Feature 8 using the default hardcoded continent.
      */
     public void run() {
-        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
+        run(DEFAULT_CONTINENT);
+    }
 
+    /**
+     * Queries and prints all cities in the specified continent by population.
+     */
+    public void run(String continent) {
         System.out.println("\n--- Feature 8: All Cities in a Continent (Largest to Smallest Population) ---");
-        System.out.print("Enter Continent name (e.g Asia, Europe, Africa): ");
 
-        if (!scanner.hasNextLine()) {
-            System.out.println("No input available.");
+        if (continent == null || continent.isBlank()) {
+            System.out.println("Continent cannot be empty.");
             return;
         }
 
-        String continent = scanner.nextLine().trim();
-
-        List<City> cities = getCitiesInContinent(continent);
-        displayReport(cities, continent);
+        List<City> cities = getCitiesInContinent(continent.trim());
+        displayReport(cities, continent.trim());
     }
 
     /**
      * Queries the database for all cities in the given continent, sorted descending by population.
      */
-    private List<City> getCitiesInContinent(String continent) {
+    public List<City> getCitiesInContinent(String continent) {
         List<City> cities = new ArrayList<>();
 
         String query = "SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, ci.Population " +

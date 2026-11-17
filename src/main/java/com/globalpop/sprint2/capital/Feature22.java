@@ -9,48 +9,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Feature 22: Displays the top N populated capital cities in a specified region.
  */
 public class Feature22 {
 
+    // Default hardcoded values
+    private static final String DEFAULT_REGION = "Southeast Asia";
+    private static final int DEFAULT_LIMIT = 5;
+
     /**
-     * Executes Feature 22: Prompts user for inputs, queries database, and prints report.
+     * Executes Feature 22 using the default hardcoded region and limit.
      */
     public void run() {
-        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
+        run(DEFAULT_REGION, DEFAULT_LIMIT);
+    }
 
+    /**
+     * Executes Feature 22: Queries database and prints report for a given region and limit.
+     */
+    public void run(String region, int limit) {
         System.out.println("\n--- Feature 22: Top N Populated Capital Cities in a Region ---");
 
-        System.out.print("Enter Region name (e.g., Southeast Asia, Western Europe, Caribbean): ");
-        if (!scanner.hasNextLine()) {
-            System.out.println("\nNo input stream available.");
-            return;
-        }
-        String region = scanner.nextLine().trim();
-
-        System.out.print("Enter N (Number of top populated capital cities to retrieve): ");
-        if (!scanner.hasNextLine()) {
-            System.out.println("\nNo input stream available for N.");
+        if (region == null || region.isBlank()) {
+            System.out.println("Region cannot be empty.");
             return;
         }
 
-        int limit;
-        try {
-            limit = Integer.parseInt(scanner.nextLine().trim());
-            if (limit <= 0) {
-                System.out.println("N must be a positive integer.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input for N. Please enter a valid number.");
+        if (limit <= 0) {
+            System.out.println("N must be a positive integer.");
             return;
         }
 
-        List<CapitalCity> capitalCities = getTopNCapitalCitiesInRegion(region, limit);
-        displayReport(capitalCities, region, limit);
+        List<CapitalCity> capitalCities = getTopNCapitalCitiesInRegion(region.trim(), limit);
+        displayReport(capitalCities, region.trim(), limit);
     }
 
     /**
@@ -60,7 +53,7 @@ public class Feature22 {
      * @param limit  Number of records to fetch
      * @return List of CapitalCity objects
      */
-    private List<CapitalCity> getTopNCapitalCitiesInRegion(String region, int limit) {
+    public List<CapitalCity> getTopNCapitalCitiesInRegion(String region, int limit) {
         List<CapitalCity> capitalCities = new ArrayList<>();
 
         // SQL Query joining country and city tables on the country's Capital ID
@@ -97,8 +90,8 @@ public class Feature22 {
 
     /**
      * @param capitalCities List of capital cities
-     * @param region        Region name entered by user
-     * @param limit         Top N number entered by user
+     * @param region        Region name
+     * @param limit         Top N number
      */
     private void displayReport(List<CapitalCity> capitalCities, String region, int limit) {
         if (capitalCities.isEmpty()) {

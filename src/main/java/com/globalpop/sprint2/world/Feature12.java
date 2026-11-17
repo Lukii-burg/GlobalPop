@@ -9,33 +9,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Feature12 {
 
+    // Default hardcoded value
+    private static final int DEFAULT_LIMIT = 10;
+
     /**
-     * Asks the user for N and prints the world city report.
+     * Runs Feature 12 using the default hardcoded limit.
      */
     public void run() {
-        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
+        run(DEFAULT_LIMIT);
+    }
 
+    /**
+     * Queries and prints the top N populated cities in the world.
+     */
+    public void run(int limit) {
         System.out.println("\n--- Feature 12: Top N Populated Cities in the World ---");
-        System.out.print("Enter N (Number of top populated cities): ");
 
-        if (!scanner.hasNextLine()) {
-            System.out.println("No input available.");
-            return;
-        }
-
-        int limit;
-        try {
-            limit = Integer.parseInt(scanner.nextLine().trim());
-            if (limit <= 0) {
-                System.out.println("Please enter a positive number greater than 0.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid integer.");
+        if (limit <= 0) {
+            System.out.println("Please enter a positive number greater than 0.");
             return;
         }
 
@@ -46,7 +40,7 @@ public class Feature12 {
     /**
      * Queries the database for the top N cities globally, sorted by population.
      */
-    private List<City> getTopWorldCities(int limit) {
+    public List<City> getTopWorldCities(int limit) {
         List<City> cities = new ArrayList<>();
 
         String query = "SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, ci.Population " +
@@ -80,7 +74,7 @@ public class Feature12 {
     }
 
     /**
-     * Formats and prints the city report
+     * Formats and prints the city report.
      */
     private void displayReport(List<City> cities, int limit) {
         if (cities.isEmpty()) {

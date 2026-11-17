@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class responsible for generating Feature 20 Report:
@@ -18,24 +17,12 @@ import java.util.Scanner;
 public class Feature20 {
 
     /**
-     * Public wrapper method called from Main to prompt the user for input,
-     * execute the database query, and display the report.
+     * Public wrapper method called from Main to execute and display the report.
+     * Uses a hardcoded parameter instead of Scanner.
+     *
+     * @param n The maximum number of top populated capital cities to show.
      */
-    public void generateAndDisplayReport() {
-        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
-
-        // Prompt user to provide N (number of top capital cities) safely using hasNextLine()
-        System.out.print("Enter value for N (number of top populated capital cities to show): ");
-        int n = 5; // Default fallback value
-        if (scanner.hasNextLine()) {
-            String input = scanner.nextLine().trim();
-            try {
-                n = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid number provided. Defaulting N to 5.");
-            }
-        }
-
+    public void generateAndDisplayReport(int n) {
         // Print report header banner
         System.out.println("\n==================================================================================================");
         System.out.println(" REPORT 20: Top " + n + " Populated Capital Cities in the World");

@@ -9,51 +9,44 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Feature16 {
 
+    // Default hardcoded values
+    private static final String DEFAULT_DISTRICT = "California";
+    private static final int DEFAULT_LIMIT = 5;
+
     /**
-     * Asks user for district and N, then prints the city report.
+     * Runs Feature 16 using the default hardcoded district and limit.
      */
     public void run() {
-        Scanner scanner = com.globalpop.ConsoleInput.getScanner();
+        run(DEFAULT_DISTRICT, DEFAULT_LIMIT);
+    }
 
+    /**
+     * Queries and prints the top N populated cities in the specified district.
+     */
+    public void run(String district, int limit) {
         System.out.println("\n--- Feature 16: Top N Populated Cities in a District ---");
 
-        System.out.print("Enter District name (e.g., California, Noord-Holland, Île-de-France): ");
-        if (!scanner.hasNextLine()) {
-            System.out.println("No input available.");
-            return;
-        }
-        String district = scanner.nextLine().trim();
-
-        System.out.print("Enter N (Number of top populated cities to retrieve): ");
-        if (!scanner.hasNextLine()) {
-            System.out.println("No input available for N.");
+        if (district == null || district.isBlank()) {
+            System.out.println("District cannot be empty.");
             return;
         }
 
-        int limit;
-        try {
-            limit = Integer.parseInt(scanner.nextLine().trim());
-            if (limit <= 0) {
-                System.out.println("Please enter a positive number greater than 0.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid integer.");
+        if (limit <= 0) {
+            System.out.println("Please enter a positive number greater than 0.");
             return;
         }
 
-        List<City> cities = getTopCitiesInDistrict(district, limit);
-        displayReport(cities, district, limit);
+        List<City> cities = getTopCitiesInDistrict(district.trim(), limit);
+        displayReport(cities, district.trim(), limit);
     }
 
     /**
      * Queries the database for the top N cities in a specific district, sorted by population.
      */
-    private List<City> getTopCitiesInDistrict(String district, int limit) {
+    public List<City> getTopCitiesInDistrict(String district, int limit) {
         List<City> cities = new ArrayList<>();
 
         String query = "SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, ci.Population " +
@@ -98,7 +91,7 @@ public class Feature16 {
         }
 
         System.out.println("\n==========================================================================================");
-        System.out.printf("Report 16 TOP %d POPULATED CITIES IN DISTRICT: %s%n", limit, district.toUpperCase());
+        System.out.printf("Report 16: TOP %d POPULATED CITIES IN DISTRICT: %s%n", limit, district.toUpperCase());
         System.out.println("==========================================================================================");
         System.out.printf("%-25s | %-25s | %-20s | %-15s%n", "City", "Country", "District", "Population");
         System.out.println("------------------------------------------------------------------------------------------");

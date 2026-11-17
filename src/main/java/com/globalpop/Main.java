@@ -6,203 +6,69 @@ import com.globalpop.sprint2.capital.*;
 import com.globalpop.sprint2.region.*;
 import com.globalpop.sprint2.world.*;
 
-import java.util.Scanner;
+import com.globalpop.sprint3.Language_Demographics.*;
+import com.globalpop.sprint3.General_Population_Totals.*;
+import com.globalpop.sprint3.Urban_vs_Rural_Population.*;
 
-/**
- * Main entry point for the GlobalPop population reporting application.
- * Users can select and run any feature from 1 to 22.
- */
 public class Main {
 
-    private static final Scanner SCANNER = ConsoleInput.getScanner();
+    private static final String REGION_NAME = "Southeast Asia";
+    private static final int TOP_LIMIT = 10;
 
-    /**
-     * Starts the application and keeps displaying the menu
-     * until the user confirms that they want to exit.
-     *
-     * @param args command-line arguments
-     */
     public static void main(String[] args) {
+
         System.out.println("==============================================");
         System.out.println("          WELCOME TO GLOBALPOP");
         System.out.println("==============================================");
 
-        boolean running = true;
+        if (args.length == 0 ||
+                (args.length == 1 && args[0].equalsIgnoreCase("all"))) {
 
-        while (running) {
-            printMenu();
+            System.out.println("Running all connected features...\n");
 
-            System.out.print(
-                    "\nSelect a feature (1-22), H for help, or 0 to exit: "
-            );
-
-            if (!SCANNER.hasNextLine()) {
-                System.out.println("\nNo console input available. Closing GlobalPop.");
-                break;
+            for (int featureNumber = 1; featureNumber <= 32; featureNumber++) {
+                executeFeature(featureNumber);
             }
 
-            String choice = SCANNER.nextLine().trim();
+        } else {
 
-            if (choice.equalsIgnoreCase("H")) {
-                printHelp();
-                continue;
-            }
+            for (String arg : args) {
+                try {
+                    int featureNumber = Integer.parseInt(arg);
+                    executeFeature(featureNumber);
 
-            if (choice.equals("0")) {
-                if (confirmExit()) {
-                    running = false;
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid argument: " + arg);
+                    System.err.println("Enter a feature number from 1 to 32, or 'all'.");
                 }
-                continue;
             }
-
-            int featureNumber;
-
-            try {
-                featureNumber = Integer.parseInt(choice);
-            } catch (NumberFormatException e) {
-                System.out.println(
-                        "Invalid choice. Enter a number from 1 to 22, H, or 0."
-                );
-                continue;
-            }
-
-            if (featureNumber < 1 || featureNumber > 22) {
-                System.out.println(
-                        "Feature number must be between 1 and 22."
-                );
-                continue;
-            }
-
-            System.out.println(
-                    "\nStarting Feature " + featureNumber + "..."
-            );
-
-            try {
-                runFeature(featureNumber);
-            } catch (Exception e) {
-                System.err.println(
-                        "\nAn unexpected error occurred while running Feature "
-                                + featureNumber + "."
-                );
-                System.err.println("Details: " + e.getMessage());
-                System.err.println(
-                        "You can return to the menu and try another feature."
-                );
-            }
-
-            System.out.println("\n----------------------------------------------");
-            System.out.print("Press Enter to return to the main menu...");
-
-            if (!SCANNER.hasNextLine()) {
-                System.out.println("\nNo further console input available.");
-                break;
-            }
-
-            SCANNER.nextLine();
         }
 
-        System.out.println("\nThank you for using GlobalPop. Goodbye!");
-    }
-
-    /**
-     * Displays all 22 features and the available console commands.
-     */
-    private static void printMenu() {
         System.out.println("\n==============================================");
-        System.out.println("             GLOBALPOP MAIN MENU");
-        System.out.println("==============================================");
-
-        System.out.println("\nCOUNTRY REPORTS");
-        System.out.println(" 1. All countries in the world");
-        System.out.println(" 2. All countries in a continent");
-        System.out.println(" 3. All countries in a region");
-        System.out.println(" 4. Top N populated countries in the world");
-        System.out.println(" 5. Top N populated countries in a continent");
-        System.out.println(" 6. Top N populated countries in a region");
-
-        System.out.println("\nCITY REPORTS");
-        System.out.println(" 7. All cities in the world");
-        System.out.println(" 8. All cities in a continent");
-        System.out.println(" 9. All cities in a region");
-        System.out.println("10. All cities in a country");
-        System.out.println("11. All cities in a district");
-        System.out.println("12. Top N populated cities in the world");
-        System.out.println("13. Top N populated cities in a continent");
-        System.out.println("14. Top N populated cities in a region");
-        System.out.println("15. Top N populated cities in a country");
-        System.out.println("16. Top N populated cities in a district");
-
-        System.out.println("\nCAPITAL CITY REPORTS");
-        System.out.println("17. All capital cities in the world");
-        System.out.println("18. All capital cities in a continent");
-        System.out.println("19. All capital cities in a region");
-        System.out.println("20. Top N populated capital cities in the world");
-        System.out.println("21. Top N populated capital cities in a continent");
-        System.out.println("22. Top N populated capital cities in a region");
-
-        System.out.println("\nH. Help");
-        System.out.println("0. Exit");
+        System.out.println("       GLOBALPOP EXECUTION COMPLETED");
         System.out.println("==============================================");
     }
 
-    /**
-     * Explains the available menu commands.
-     */
-    private static void printHelp() {
-        System.out.println("\n============== GLOBALPOP HELP ==============");
-        System.out.println("1-22 : Run the selected population report.");
-        System.out.println("H    : Display this help information.");
-        System.out.println("0    : Ask for confirmation before exiting.");
-        System.out.println(
-                "N    : In reports that ask for N, enter a positive whole number."
-        );
-        System.out.println(
-                "Input: Follow the prompts shown by the selected feature."
-        );
-        System.out.println(
-                "Database: Start the project's configured MySQL service before running reports."
-        );
-        System.out.println(
-                "After a report, press Enter to return to the main menu."
-        );
-        System.out.println("============================================");
-    }
+    private static void executeFeature(int featureNumber) {
 
-    /**
-     * Requests confirmation before closing the application.
-     *
-     * @return true if the user confirms exit; otherwise false
-     */
-    private static boolean confirmExit() {
-        while (true) {
-            System.out.print("Are you sure you want to exit? (Y/N): ");
+        System.out.println("\n----------------------------------------------");
+        System.out.println("Starting Feature " + featureNumber + "...");
+        System.out.println("----------------------------------------------");
 
-            if (!SCANNER.hasNextLine()) {
-                return true;
-            }
+        try {
+            runFeature(featureNumber);
 
-            String answer = SCANNER.nextLine().trim();
-
-            if (answer.equalsIgnoreCase("Y")) {
-                return true;
-            }
-
-            if (answer.equalsIgnoreCase("N")) {
-                System.out.println("Returning to the main menu.");
-                return false;
-            }
-
-            System.out.println("Invalid response. Enter Y or N.");
+        } catch (Exception e) {
+            System.err.println("Error running Feature " + featureNumber);
+            System.err.println("Details: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Calls the existing class and method for the selected feature.
-     *
-     * @param featureNumber the selected feature number
-     */
     private static void runFeature(int featureNumber) {
+
         switch (featureNumber) {
+
             case 1:
                 new Feature1().generateAndDisplayReport();
                 break;
@@ -212,23 +78,7 @@ public class Main {
                 break;
 
             case 3:
-                System.out.print(
-                        "Enter region name (e.g., Western Europe, Caribbean): "
-                );
-
-                if (!SCANNER.hasNextLine()) {
-                    System.out.println("No region input available.");
-                    return;
-                }
-
-                String region = SCANNER.nextLine().trim();
-
-                if (region.isEmpty()) {
-                    System.out.println("Region name cannot be empty.");
-                    return;
-                }
-
-                Feature3.generateReport(region);
+                Feature3.generateReport(REGION_NAME);
                 break;
 
             case 4:
@@ -272,7 +122,10 @@ public class Main {
                 break;
 
             case 14:
-                new Feature14().generateAndDisplayReport();
+                new Feature14().generateAndDisplayReport(
+                        REGION_NAME,
+                        TOP_LIMIT
+                );
                 break;
 
             case 15:
@@ -296,7 +149,7 @@ public class Main {
                 break;
 
             case 20:
-                new Feature20().generateAndDisplayReport();
+                new Feature20().generateAndDisplayReport(TOP_LIMIT);
                 break;
 
             case 21:
@@ -307,8 +160,49 @@ public class Main {
                 new Feature22().run();
                 break;
 
+            case 23:
+                new Feature23().generateAndDisplayReport();
+                break;
+
+            case 24:
+                new Feature24().generateAndDisplayReport();
+                break;
+
+            case 25:
+                new Feature25().generateAndDisplayReport();
+                break;
+
+            case 26:
+                new Feature26().generateAndDisplayReport();
+                break;
+
+            case 27:
+                new Feature27().generateAndDisplayReport("Asia");
+                break;
+
+            case 28:
+                new Feature28().run();
+                break;
+
+            case 29:
+                new Feature29().run();
+                break;
+
+            case 30:
+                new Feature30().generateAndDisplayReport();
+                break;
+
+            case 31:
+                new Feature31().generateAndDisplayReport();
+                break;
+
+            case 32:
+                new Feature32().generateAndDisplayReport();
+                break;
+
+
             default:
-                System.out.println("Unknown feature number.");
+                System.err.println("Unknown feature number: " + featureNumber);
         }
     }
 }
