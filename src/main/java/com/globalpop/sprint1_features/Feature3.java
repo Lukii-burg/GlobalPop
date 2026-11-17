@@ -1,4 +1,4 @@
-package com.globalpop;
+package com.globalpop.sprint1_features;
 
 import com.globalpop.database.DatabaseConnection;
 
