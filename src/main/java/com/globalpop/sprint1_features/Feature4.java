@@ -1,3 +1,4 @@
+
 package com.globalpop.sprint1_features;
 
 import com.globalpop.database.DatabaseConnection;
@@ -9,35 +10,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Feature 4:
  * Displays the top N most populated countries in the world.
- *
- * N is provided by the user.
+ * N is hardcoded.
  */
 public class Feature4 {
+
+    // Hardcoded number of countries to display
+    private static final int N = 10;
+
     public static void run() {
-
-        Scanner scanner = new Scanner(System.in);
-
-        int n = getValidN(scanner);
-
-        /*
-         * If no console input is available, getValidN()
-         * returns -1 and the feature exits safely.
-         */
-        if (n <= 0) {
-            return;
-        }
 
         try {
 
             List<Country> countries =
-                    getTopPopulatedCountries(n);
+                    getTopPopulatedCountries(N);
 
-            displayReport(countries, n);
+            displayReport(countries, N);
 
         } catch (SQLException e) {
 
@@ -51,9 +42,6 @@ public class Feature4 {
     /**
      * Retrieves the top N most populated countries
      * from the database.
-     *
-     * Countries are ordered from largest population
-     * to smallest population.
      */
     public static List<Country> getTopPopulatedCountries(
             int n) throws SQLException {
@@ -133,53 +121,6 @@ public class Feature4 {
     }
 
     /**
-     * Gets a valid positive N from the user.
-     */
-    private static int getValidN(Scanner scanner) {
-
-        while (true) {
-
-            System.out.print(
-                    "Enter the number of top countries (N): "
-            );
-
-            /*
-             * GitHub Actions does not provide interactive
-             * keyboard input to the Docker container.
-             */
-            if (!scanner.hasNextLine()) {
-
-                System.out.println(
-                        "No input available."
-                );
-
-                return -1;
-            }
-
-            String input = scanner.nextLine().trim();
-
-            try {
-
-                int n = Integer.parseInt(input);
-
-                if (n > 0) {
-                    return n;
-                }
-
-                System.out.println(
-                        "N must be greater than 0."
-                );
-
-            } catch (NumberFormatException e) {
-
-                System.out.println(
-                        "Please enter a valid number."
-                );
-            }
-        }
-    }
-
-    /**
      * Displays the country report.
      */
     private static void displayReport(
@@ -193,7 +134,7 @@ public class Feature4 {
         );
 
         System.out.println(
-                " TOP " + n +
+                " Report 4: TOP " + n +
                         " MOST POPULATED COUNTRIES IN THE WORLD"
         );
 
@@ -217,9 +158,7 @@ public class Feature4 {
 
         if (countries.isEmpty()) {
 
-            System.out.println(
-                    "No countries found."
-            );
+            System.out.println("No countries found.");
 
         } else {
 

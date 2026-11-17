@@ -9,92 +9,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Feature 6:
  * Displays the top N populated countries in a specified region.
  */
 public class Feature6 {
+
+    // Default hardcoded values for CI/CD (GitHub Actions / Docker) execution
+    private static final String DEFAULT_REGION = "Southeast Asia";
+    private static final int DEFAULT_LIMIT = 5;
+
     public void execute() {
+        execute(DEFAULT_REGION, DEFAULT_LIMIT);
+    }
 
-        Scanner scanner = new Scanner(System.in);
-
+    public void execute(String region, int limit) {
         System.out.println(
                 "\n--- Feature 6: Top N Populated Countries in a Region ---"
         );
 
-        System.out.print(
-                "Enter Region name (e.g., Southeast Asia, Western Europe, Caribbean): "
-        );
-
-        if (!scanner.hasNextLine()) {
-            System.out.println(
-                    "\nNo input stream available."
-            );
-            return;
-        }
-
-        String region = scanner.nextLine().trim();
-
-        if (region.isBlank()) {
-            System.out.println(
-                    "Region cannot be empty."
-            );
-            return;
-        }
-
-        System.out.print(
-                "Enter N (Number of top populated countries to retrieve): "
-        );
-
-        if (!scanner.hasNextLine()) {
-            System.out.println(
-                    "\nNo input stream available for N."
-            );
-            return;
-        }
-
-        String input = scanner.nextLine().trim();
-
-        int limit;
-
         try {
-
-            limit = Integer.parseInt(input);
-
-        } catch (NumberFormatException e) {
-
-            System.out.println(
-                    "Invalid input for N. Please enter a valid number."
-            );
-            return;
-        }
-
-        if (limit <= 0) {
-
-            System.out.println(
-                    "N must be a positive integer."
-            );
-            return;
-        }
-
-        try {
-
-            List<Country> countries =
-                    getTopNCountriesInRegion(
-                            region,
-                            limit
-                    );
-
-            displayReport(
-                    countries,
-                    region,
-                    limit
-            );
-
+            List<Country> countries = getTopNCountriesInRegion(region, limit);
+            displayReport(countries, region, limit);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid parameter: " + e.getMessage());
         } catch (SQLException e) {
-
             System.err.println(
                     "Database error while fetching Feature 6 data: "
                             + e.getMessage()
@@ -198,7 +138,7 @@ public class Feature6 {
      * Displays the formatted country report.
      *
      * @param countries List of countries.
-     * @param region Region name entered by the user.
+     * @param region Region name.
      * @param limit Number of countries requested.
      */
     private void displayReport(
@@ -213,7 +153,7 @@ public class Feature6 {
         );
 
         System.out.printf(
-                " TOP %d POPULATED COUNTRIES IN REGION: %s%n",
+                "Report 6: TOP %d POPULATED COUNTRIES IN REGION: %s%n",
                 limit,
                 region.toUpperCase()
         );
