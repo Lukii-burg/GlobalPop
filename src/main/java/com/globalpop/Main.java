@@ -195,6 +195,31 @@ public class Main {
             System.out.println("Invalid response. Enter Y or N.");
         }
     }
+    private static int readPositiveLimit(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+
+            if (!SCANNER.hasNextLine()) {
+                System.out.println("No input available.");
+                return -1;
+            }
+
+            String input = SCANNER.nextLine().trim();
+
+            try {
+                int limit = Integer.parseInt(input);
+
+                if (limit > 0) {
+                    return limit;
+                }
+
+                System.out.println("Please enter a number greater than zero.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a whole number.");
+            }
+        }
+    }
 
     /**
      * Calls the existing class and method for the selected feature.
@@ -272,7 +297,27 @@ public class Main {
                 break;
 
             case 14:
-                new Feature14().generateAndDisplayReport();
+                System.out.print("Enter region name (e.g., Southeast Asia, Western Europe): ");
+
+                if (!SCANNER.hasNextLine()) {
+                    System.out.println("No region input available.");
+                    return;
+                }
+
+                String cityRegion = SCANNER.nextLine().trim();
+
+                if (cityRegion.isEmpty()) {
+                    System.out.println("Region cannot be empty.");
+                    return;
+                }
+
+                int cityLimit = readPositiveLimit("Enter the number of top cities: ");
+
+                if (cityLimit <= 0) {
+                    return;
+                }
+
+                new Feature14().generateAndDisplayReport(cityRegion, cityLimit);
                 break;
 
             case 15:
@@ -296,7 +341,15 @@ public class Main {
                 break;
 
             case 20:
-                new Feature20().generateAndDisplayReport();
+                int capitalLimit = readPositiveLimit(
+                        "Enter the number of top populated capital cities: "
+                );
+
+                if (capitalLimit <= 0) {
+                    return;
+                }
+
+                new Feature20().generateAndDisplayReport(capitalLimit);
                 break;
 
             case 21:
