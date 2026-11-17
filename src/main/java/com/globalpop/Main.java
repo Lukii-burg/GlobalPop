@@ -6,9 +6,12 @@ import com.globalpop.sprint2.capital.*;
 import com.globalpop.sprint2.region.*;
 import com.globalpop.sprint2.world.*;
 
+import com.globalpop.sprint3.Language_Demographics.*;
+import com.globalpop.sprint3.General_Population_Totals.*;
+import com.globalpop.sprint3.Urban_vs_Rural_Population.*;
+
 public class Main {
 
-    // Hard-coded values for features that require input.
     private static final String REGION_NAME = "Southeast Asia";
     private static final int TOP_LIMIT = 10;
 
@@ -18,31 +21,25 @@ public class Main {
         System.out.println("          WELCOME TO GLOBALPOP");
         System.out.println("==============================================");
 
-        // Run all features if no command-line argument is supplied.
-        if (args.length == 0) {
-            System.out.println("Running all features (1-22)...\n");
+        if (args.length == 0 ||
+                (args.length == 1 && args[0].equalsIgnoreCase("all"))) {
 
-            for (int featureNumber = 1; featureNumber <= 22; featureNumber++) {
+            System.out.println("Running all connected features...\n");
+
+            for (int featureNumber = 1; featureNumber <= 32; featureNumber++) {
                 executeFeature(featureNumber);
             }
 
         } else {
-            // Run the feature numbers supplied as command-line arguments.
-            for (String arg : args) {
-                if (arg.equalsIgnoreCase("all")) {
-                    for (int featureNumber = 1; featureNumber <= 22; featureNumber++) {
-                        executeFeature(featureNumber);
-                    }
-                    break;
-                }
 
+            for (String arg : args) {
                 try {
                     int featureNumber = Integer.parseInt(arg);
                     executeFeature(featureNumber);
 
                 } catch (NumberFormatException e) {
                     System.err.println("Invalid argument: " + arg);
-                    System.err.println("Use a feature number from 1 to 22, or 'all'.");
+                    System.err.println("Enter a feature number from 1 to 32, or 'all'.");
                 }
             }
         }
@@ -68,9 +65,6 @@ public class Main {
         }
     }
 
-    /**
-     * Calls the existing class and method for each feature.
-     */
     private static void runFeature(int featureNumber) {
 
         switch (featureNumber) {
@@ -165,6 +159,47 @@ public class Main {
             case 22:
                 new Feature22().run();
                 break;
+
+            case 23:
+                new Feature23().generateAndDisplayReport();
+                break;
+
+            case 24:
+                new Feature24().generateAndDisplayReport();
+                break;
+
+            case 25:
+                new Feature25().generateAndDisplayReport();
+                break;
+
+            case 26:
+                new Feature26().generateAndDisplayReport();
+                break;
+
+            case 27:
+                new Feature27().generateAndDisplayReport("Asia");
+                break;
+
+            case 28:
+                new Feature28().run();
+                break;
+
+            case 29:
+                new Feature29().run();
+                break;
+
+            case 30:
+                new Feature30().generateAndDisplayReport();
+                break;
+
+            case 31:
+                new Feature31().generateAndDisplayReport();
+                break;
+
+            case 32:
+                new Feature32().generateAndDisplayReport();
+                break;
+
 
             default:
                 System.err.println("Unknown feature number: " + featureNumber);
