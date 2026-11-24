@@ -27,6 +27,10 @@ public class Feature7Test {
      */
     @BeforeAll
     static void init() {
+        System.out.println("\n******************************************************************");
+        System.out.println("                 RUNNING UNIT TESTS FOR FEATURE 7                 ");
+        System.out.println("******************************************************************");
+
         feature7 = new Feature7();
 
         // The valid test data is initialized here so it can be reused across any test method.

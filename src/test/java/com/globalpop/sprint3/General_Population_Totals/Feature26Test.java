@@ -19,6 +19,10 @@ public class Feature26Test {
      */
     @BeforeAll
     static void init() {
+        System.out.println("\n******************************************************************");
+        System.out.println("                 RUNNING UNIT TESTS FOR FEATURE 26                ");
+        System.out.println("******************************************************************");
+
         feature26 = new Feature26();
     }
 
