@@ -26,7 +26,7 @@ public class Feature26 {
         // Fetch the total world population from the database
         long worldPopulation = getWorldPopulation();
 
-        // Print the fetched population
+        // Print the fetched population using package-private formatting method
         printPopulationReport(worldPopulation);
     }
 
@@ -58,11 +58,13 @@ public class Feature26 {
     }
 
     /**
-     * Private helper method to print the population in a clean format.
+     * Helper method to print the population in a clean format.
+     * Changed from private to package-private to allow JUnit testing access.
      *
      * @param population The total population to print.
      */
-    private void printPopulationReport(long population) {
+    void printPopulationReport(long population) {
+        // Safety check for invalid or zero population data
         if (population <= 0) {
             System.out.println("No population data available.");
             return;

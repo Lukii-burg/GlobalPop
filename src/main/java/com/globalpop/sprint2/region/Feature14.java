@@ -32,7 +32,7 @@ public class Feature14 {
         // Fetch list of top N cities from database using private method
         List<City> cities = getTopNCitiesInRegion(region, n);
 
-        // Print fetched cities using private formatting method
+        // Print fetched cities using package-private formatting method
         printCityReport(cities);
     }
 
@@ -93,11 +93,12 @@ public class Feature14 {
     }
 
     /**
-     * Private helper method to print city records in a formatted table layout.
+     * Helper method to print city records in a formatted table layout.
+     * Changed from private to package-private to allow JUnit testing access.
      *
      * @param cities List of City records to print.
      */
-    private void printCityReport(List<City> cities) {
+    void printCityReport(List<City> cities) {
         // Check if list is null or empty
         if (cities == null || cities.isEmpty()) {
             // Display notice when no data was found
@@ -114,18 +115,30 @@ public class Feature14 {
         // Print table divider line
         System.out.println("------------------------------------------------------------------------------------------------------------------");
 
+        // Create a counter variable before the loop
+        int printedCount = 0;
+
         // Iterate through each city and print formatted row using getCityName()
         for (City city : cities) {
+
+            // Added safety check to skip null objects and prevent application crashes
+            if (city == null) {
+                continue;
+            }
+
             System.out.printf(rowFormat,
                     city.getCityName(),
                     city.getCountry(),
                     city.getDistrict(),
                     city.getPopulation()
             );
+
+            // Increase the count for every valid city printed
+            printedCount++;
         }
 
-        // Print footer summary with total count
+        // Print footer summary using the accurate printed count
         System.out.println("------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("Total Cities Listed: %d%n", cities.size());
+        System.out.printf("Total Cities Listed: %d%n", printedCount);
     }
 }

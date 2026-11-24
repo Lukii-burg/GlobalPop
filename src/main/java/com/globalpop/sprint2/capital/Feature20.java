@@ -31,7 +31,7 @@ public class Feature20 {
         // Fetch list of top N capital cities from database using private method
         List<CapitalCity> capitalCities = getTopNCapitalCitiesInWorld(n);
 
-        // Print fetched capital cities using private formatting method
+        // Print fetched capital cities using package-private formatting method
         printCapitalCityReport(capitalCities);
     }
 
@@ -88,11 +88,12 @@ public class Feature20 {
     }
 
     /**
-     * Private helper method to print capital city records in a formatted table layout.
+     * Helper method to print capital city records in a formatted table layout.
+     * Changed from private to package-private to allow JUnit testing access.
      *
      * @param capitalCities List of CapitalCity records to print.
      */
-    private void printCapitalCityReport(List<CapitalCity> capitalCities) {
+    void printCapitalCityReport(List<CapitalCity> capitalCities) {
         // Check if list is null or empty
         if (capitalCities == null || capitalCities.isEmpty()) {
             // Display notice when no data was found
@@ -109,17 +110,29 @@ public class Feature20 {
         // Print table divider line
         System.out.println("--------------------------------------------------------------------------------------------------");
 
+        // Create a counter variable before the loop
+        int printedCount = 0;
+
         // Iterate through each capital city and print formatted row using getCapitalCityName()
         for (CapitalCity capitalCity : capitalCities) {
+
+            // Added safety check to skip null objects and prevent application crashes
+            if (capitalCity == null) {
+                continue;
+            }
+
             System.out.printf(rowFormat,
                     capitalCity.getCapitalCityName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation()
             );
+
+            // Increase the count for every valid capital city printed
+            printedCount++;
         }
 
-        // Print footer summary with total count
+        // Print footer summary using the accurate printed count
         System.out.println("--------------------------------------------------------------------------------------------------");
-        System.out.printf("Total Capital Cities Listed: %d%n", capitalCities.size());
+        System.out.printf("Total Capital Cities Listed: %d%n", printedCount);
     }
 }
