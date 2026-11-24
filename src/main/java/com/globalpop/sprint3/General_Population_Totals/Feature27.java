@@ -25,7 +25,7 @@ public class Feature27 {
         System.out.println(" REPORT 27: Total Population of Continent: " + continent);
         System.out.println("==================================================================");
 
-        // Fetch the total population for the specified continent
+        // Fetch the total population for the specified continent using package-private method
         long continentPopulation = getContinentPopulation(continent);
 
         // Print the fetched population using package-private formatting method
@@ -33,14 +33,14 @@ public class Feature27 {
     }
 
     /**
-     * Private method to fetch the sum of populations for countries in a specific continent.
+     * Package-private method to fetch the sum of populations for countries in a specific continent.
      * Includes annotations to suppress IDE unresolved table inspection warnings.
      *
      * @param continent The continent to filter by.
      * @return The total continent population as a long.
      */
     @SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
-    private long getContinentPopulation(String continent) {
+    long getContinentPopulation(String continent) {
         long totalPopulation = 0;
 
         // SQL query to calculate the sum of the Population column for a specific continent

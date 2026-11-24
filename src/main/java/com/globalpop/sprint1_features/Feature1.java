@@ -25,7 +25,7 @@ public class Feature1 {
         System.out.println(" REPORT 1: All Countries in the World (Organised by Population: Largest to Smallest)");
         System.out.println("================================================================================================================================");
 
-        // Fetch list of countries from database using private method
+        // Fetch list of countries from database using package-private method
         List<Country> countries = getCountriesByPopulationDescending();
 
         // Print fetched countries using package-private formatting method
@@ -33,14 +33,14 @@ public class Feature1 {
     }
 
     /**
-     * Private method to fetch all countries from the database sorted by population descending.
+     * Package-private method to fetch all countries from the database sorted by population descending.
      * Joins the 'country' table with the 'city' table to fetch the Capital city name.
      * Includes annotation to suppress IDE unresolved table inspection warnings.
      *
      * @return List of Country objects ordered by population (highest first).
      */
     @SuppressWarnings("SqlResolve")
-    private List<Country> getCountriesByPopulationDescending() {
+    List<Country> getCountriesByPopulationDescending() {
         // Initialize an empty list to store Country objects
         List<Country> countryList = new ArrayList<>();
 

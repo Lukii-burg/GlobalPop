@@ -29,7 +29,7 @@ public class Feature14 {
         System.out.println(" REPORT 14: Top " + n + " Populated Cities in Region: " + region);
         System.out.println("==================================================================================================");
 
-        // Fetch list of top N cities from database using private method
+        // Fetch list of top N cities from database using package-private method
         List<City> cities = getTopNCitiesInRegion(region, n);
 
         // Print fetched cities using package-private formatting method
@@ -37,7 +37,7 @@ public class Feature14 {
     }
 
     /**
-     * Private method to fetch the top N cities in a specific region sorted by population descending.
+     * Package-private method to fetch the top N cities in a specific region sorted by population descending.
      * Joins the 'city' table with the 'country' table to filter by Region, and applies a LIMIT clause.
      * Includes annotation to suppress IDE unresolved table inspection warnings.
      *
@@ -46,7 +46,7 @@ public class Feature14 {
      * @return List of City objects ordered by population (highest first).
      */
     @SuppressWarnings("SqlResolve")
-    private List<City> getTopNCitiesInRegion(String region, int n) {
+    List<City> getTopNCitiesInRegion(String region, int n) {
         // Initialize an empty list to store City objects
         List<City> cityList = new ArrayList<>();
 

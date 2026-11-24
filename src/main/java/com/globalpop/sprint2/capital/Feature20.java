@@ -28,7 +28,7 @@ public class Feature20 {
         System.out.println(" REPORT 20: Top " + n + " Populated Capital Cities in the World");
         System.out.println("==================================================================================================");
 
-        // Fetch list of top N capital cities from database using private method
+        // Fetch list of top N capital cities from database using package-private method
         List<CapitalCity> capitalCities = getTopNCapitalCitiesInWorld(n);
 
         // Print fetched capital cities using package-private formatting method
@@ -36,7 +36,7 @@ public class Feature20 {
     }
 
     /**
-     * Private method to fetch the top N capital cities in the world sorted by population descending.
+     * Package-private method to fetch the top N capital cities in the world sorted by population descending.
      * Joins the 'country' table with the 'city' table on country.Capital = city.ID, and applies a LIMIT clause.
      * Includes annotation to suppress IDE unresolved table inspection warnings.
      *
@@ -44,7 +44,7 @@ public class Feature20 {
      * @return List of CapitalCity objects ordered by population (highest first).
      */
     @SuppressWarnings("SqlResolve")
-    private List<CapitalCity> getTopNCapitalCitiesInWorld(int n) {
+    List<CapitalCity> getTopNCapitalCitiesInWorld(int n) {
         // Initialize an empty list to store CapitalCity objects
         List<CapitalCity> capitalCityList = new ArrayList<>();
 
