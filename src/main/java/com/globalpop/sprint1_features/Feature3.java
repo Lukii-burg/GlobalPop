@@ -1,6 +1,6 @@
 package com.globalpop.sprint1_features;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,7 +47,7 @@ public class Feature3 {
         displayReport(region, countries);
     }
 
-    private static List<Country> fetchCountriesInRegion(String region) {
+    public static List<Country> fetchCountriesInRegion(String region) {
         List<Country> countries = new ArrayList<>();
         String sql = "SELECT c.Code, c.Name, c.Continent, c.Region, c.Population, ci.Name AS Capital " +
                 "FROM country c " +
@@ -79,18 +79,22 @@ public class Feature3 {
         return countries;
     }
 
-    private static void displayReport(String region, List<Country> countries) {
+    public static void displayReport(String region, List<Country> countries) {
         System.out.println("==========================================================================================");
-        System.out.printf("Report 3: Countries in '%s' (Largest to Smallest Population)%n", region);
+        System.out.printf("Report 3: Countries in '%s' (Largest to Smallest Population)%n",
+                region != null ? region : "N/A");
         System.out.println("==========================================================================================");
         System.out.printf("%-6s | %-35s | %-15s | %-20s | %-12s | %-20s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
         System.out.println("------------------------------------------------------------------------------------------");
 
-        if (countries.isEmpty()) {
+        if (countries == null || countries.isEmpty()) {
             System.out.println("No records found for the specified region.");
         } else {
             for (Country country : countries) {
+                if (country == null) {
+                    continue;
+                }
                 System.out.printf("%-6s | %-35s | %-15s | %-20s | %,12d | %-20s%n",
                         country.getCode(),
                         country.getName(),

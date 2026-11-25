@@ -20,16 +20,16 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run Maven tests
-        run: mvn clean test
-
-      - name: Build with Maven
-        run: mvn clean package
-
       - name: Validate Docker Compose
         run: docker compose config -q
 
-      - name: Build and run Docker Compose
+      - name: Start MySQL Database for Testing
+        run: docker compose up -d --wait db
+
+      - name: Run Unit and Integration Tests
+        run: mvn clean verify
+
+      - name: Build and Run App Container
         run: docker compose up --build --abort-on-container-exit --exit-code-from app
 
       - name: Display Docker Compose logs

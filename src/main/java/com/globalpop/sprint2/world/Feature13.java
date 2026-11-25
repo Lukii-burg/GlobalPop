@@ -1,7 +1,7 @@
 
 package com.globalpop.sprint2.world;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.City;
 
 import java.sql.Connection;

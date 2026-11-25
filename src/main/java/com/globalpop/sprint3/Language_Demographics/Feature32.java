@@ -1,6 +1,6 @@
 package com.globalpop.sprint3.Language_Demographics;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.Language;
 
 import java.sql.Connection;

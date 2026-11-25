@@ -1,6 +1,6 @@
 package com.globalpop.sprint2.capital;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.CapitalCity;
 
 import java.sql.Connection;
