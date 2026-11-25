@@ -6,15 +6,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This class handles Integration Testing for Feature 27.
- * It interacts with the live Docker MySQL database to verify the SQL sum query returns the correct continent population.
+ * This class runs integration tests for Feature 27.
+ * It connects to the live MySQL database in Docker to check if the SQL SUM query
+ * calculates the total population for one chosen continent.
  */
 public class Feature27IT {
 
+    // Stores the Feature27 object used to run the database methods during testing
     static Feature27 feature27;
 
     /**
-     * Initializes the Feature27 object before running tests.
+     * Runs once before all test methods in this class start.
+     * Prints a clear title banner to the console and creates a new Feature27 instance.
      */
     @BeforeAll
     static void init() {
@@ -22,29 +25,36 @@ public class Feature27IT {
         System.out.println("            RUNNING INTEGRATION TESTS FOR FEATURE 27              ");
         System.out.println("******************************************************************");
 
+        // Create the Feature27 object so the test method can call its database functions
         feature27 = new Feature27();
     }
 
     /**
-     * Tests that the SQL query successfully calculates the sum of populations for a specific continent.
-     * Requires an active database connection via DatabaseConnection.
+     * Tests if the SQL SUM query filters by continent and calculates the total population accurately.
+     * Needs an active database connection through DatabaseConnection to pass.
      */
     @Test
     void testGetContinentPopulation() {
-        // Arrange: We will test the calculation using the continent of Asia
+        // Step 1 (Arrange): Set the continent filter to "Asia"
         String targetContinent = "Asia";
 
-        // Act: Run the method that executes the real SQL query against the database
+        // Step 2 (Act): Call the database method to run the SQL SUM query for the chosen continent
         long continentPopulation = feature27.getContinentPopulation(targetContinent);
 
-        // Assert 1: Verify the database returned a positive number (preventing default 0 returns)
+        // Step 3 (Assert - Positive Value Check): Confirm the database returned a value greater than 0.
+        // This proves the WHERE clause matched records for Asia and returned a valid sum.
         assertTrue(continentPopulation > 0, "The database should return a population greater than 0 for " + targetContinent + ".");
 
-        // Assert 2: Verify the SQL SUM and CAST(SIGNED) successfully handled the large dataset for the continent.
-        // The standard MySQL 'world' database population for Asia is roughly 3.7 billion.
+        // Step 4 (Assert - Large Number Check): Confirm the population of Asia is over 3 billion.
+        // This proves the long data type and SQL CAST handled the large continent sum without overflow.
         assertTrue(continentPopulation > 3000000000L,
                 "The population of Asia should be successfully calculated as over 3 billion without integer overflow.");
 
-        System.out.println("Integration Test Passed: Successfully calculated the population of " + targetContinent + " from the database as " + String.format("%,d", continentPopulation) + "!");
+        // Step 5 (Output): Print the formatted continent population report to the console
+        System.out.println("\n--- DATABASE RESULTS ---");
+        feature27.printPopulationReport(targetContinent, continentPopulation);
+
+        // Print a final confirmation message showing the continent name and formatted total population
+        System.out.println("\nIntegration Test Passed: Successfully calculated the population of " + targetContinent + " from the database as " + String.format("%,d", continentPopulation) + "!");
     }
 }
