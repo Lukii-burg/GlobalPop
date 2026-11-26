@@ -1,6 +1,6 @@
 package com.globalpop.sprint2.world;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.City;
 
 import java.sql.Connection;
@@ -76,8 +76,11 @@ public class Feature12 {
     /**
      * Formats and prints the city report.
      */
-    private void displayReport(List<City> cities, int limit) {
-        if (cities.isEmpty()) {
+    /**
+     * Formats and prints the city report.
+     */
+    public void displayReport(List<City> cities, int limit) {
+        if (cities == null || cities.isEmpty()) {
             System.out.println("\nNo cities found.");
             return;
         }
@@ -89,6 +92,9 @@ public class Feature12 {
         System.out.println("------------------------------------------------------------------------------------------");
 
         for (City c : cities) {
+            if (c == null) {
+                continue;
+            }
             System.out.printf("%-25s | %-25s | %-20s | %,15d%n",
                     c.getCityName(),
                     c.getCountry(),

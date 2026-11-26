@@ -1,6 +1,6 @@
 package com.globalpop.sprint1_features;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.Country;
 
 import java.sql.Connection;
@@ -141,7 +141,7 @@ public class Feature6 {
      * @param region Region name.
      * @param limit Number of countries requested.
      */
-    private void displayReport(
+    public void displayReport(
             List<Country> countries,
             String region,
             int limit) {
@@ -155,7 +155,7 @@ public class Feature6 {
         System.out.printf(
                 "Report 6: TOP %d POPULATED COUNTRIES IN REGION: %s%n",
                 limit,
-                region.toUpperCase()
+                region != null ? region.toUpperCase() : "N/A"
         );
 
         System.out.println(
@@ -176,7 +176,7 @@ public class Feature6 {
                 "----------------------------------------------------------------------------------------------------------"
         );
 
-        if (countries.isEmpty()) {
+        if (countries == null || countries.isEmpty()) {
 
             System.out.println(
                     "No countries found for region: \""
@@ -187,6 +187,9 @@ public class Feature6 {
         } else {
 
             for (Country country : countries) {
+                if (country == null) {
+                    continue;
+                }
 
                 System.out.printf(
                         "%-6s | %-35s | %-15s | %-20s | %,15d | %-20s%n",
@@ -195,7 +198,7 @@ public class Feature6 {
                         country.getContinent(),
                         country.getRegion(),
                         country.getPopulation(),
-                        country.getCapital()
+                        country.getCapital() != null ? country.getCapital() : "N/A"
                 );
             }
         }
@@ -206,7 +209,7 @@ public class Feature6 {
 
         System.out.printf(
                 "Countries displayed: %d%n",
-                countries.size()
+                countries != null ? countries.size() : 0
         );
 
         System.out.println(

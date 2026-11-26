@@ -1,7 +1,7 @@
 
 package com.globalpop.sprint1_features;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.Country;
 
 import java.sql.Connection;

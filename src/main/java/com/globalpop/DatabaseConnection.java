@@ -1,4 +1,4 @@
-package com.globalpop.database;
+package com.globalpop;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

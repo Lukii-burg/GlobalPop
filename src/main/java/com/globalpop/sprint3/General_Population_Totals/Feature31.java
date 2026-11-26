@@ -1,7 +1,7 @@
 
 package com.globalpop.sprint3.General_Population_Totals;
 
-import com.globalpop.database.DatabaseConnection;
+import com.globalpop.DatabaseConnection;
 import com.globalpop.model.GeneralPopulationLookups;
 
 import java.sql.Connection;
@@ -45,7 +45,7 @@ public class Feature31 {
     /**
      * Retrieves the population of a specific city.
      */
-    private GeneralPopulationLookups getCityPopulation(
+    public GeneralPopulationLookups getCityPopulation(
             String city, String country) throws SQLException {
 
         String sql = """
@@ -78,7 +78,11 @@ public class Feature31 {
         return null;
     }
 
-    private void displayReport(GeneralPopulationLookups report) {
+    public void displayReport(GeneralPopulationLookups report) {
+        if (report == null) {
+            System.out.println("\nNo population data found for this city.");
+            return;
+        }
 
         System.out.println("\n==============================================================");
         System.out.println("                CITY POPULATION REPORT");
@@ -86,7 +90,7 @@ public class Feature31 {
 
         System.out.printf("%-35s %s%n",
                 "City",
-                report.getName());
+                report.getName() != null ? report.getName() : "N/A");
 
         System.out.printf("%-35s %,20d%n",
                 "Population",
