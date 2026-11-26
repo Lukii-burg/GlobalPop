@@ -25,20 +25,22 @@ public class Feature27 {
         System.out.println(" REPORT 27: Total Population of Continent: " + continent);
         System.out.println("==================================================================");
 
-        // Fetch the total population for the specified continent
+        // Fetch the total population for the specified continent using package-private method
         long continentPopulation = getContinentPopulation(continent);
 
-        // Print the fetched population
+        // Print the fetched population using package-private formatting method
         printPopulationReport(continent, continentPopulation);
     }
 
     /**
-     * Private method to fetch the sum of populations for countries in a specific continent.
+     * Package-private method to fetch the sum of populations for countries in a specific continent.
+     * Includes annotations to suppress IDE unresolved table inspection warnings.
      *
      * @param continent The continent to filter by.
      * @return The total continent population as a long.
      */
-    private long getContinentPopulation(String continent) {
+    @SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
+    long getContinentPopulation(String continent) {
         long totalPopulation = 0;
 
         // SQL query to calculate the sum of the Population column for a specific continent
@@ -67,12 +69,14 @@ public class Feature27 {
     }
 
     /**
-     * Private helper method to print the population in a clean format.
+     * Helper method to print the population in a clean format.
+     * Changed from private to package-private to allow JUnit testing access.
      *
      * @param continent  The continent name.
      * @param population The total population to print.
      */
-    private void printPopulationReport(String continent, long population) {
+    void printPopulationReport(String continent, long population) {
+        // Safety check for invalid or zero population data
         if (population <= 0) {
             System.out.println("No population data available for " + continent + ".");
             return;

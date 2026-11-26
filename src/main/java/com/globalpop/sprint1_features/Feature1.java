@@ -11,16 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- - Class responsible for generating Feature 01 Report:
-
- - "All the countries in the world organized by largest population to smallest."
-
+ * Class responsible for generating Feature 01 Report:
+ * "All the countries in the world organized by largest population to smallest."
  */
 public class Feature1 {
 
     /**
-     - Public wrapper method called from Main to execute and display the report.
-
+     * Public wrapper method called from Main to execute and display the report.
      */
     public void generateAndDisplayReport() {
         // Print report header banner
@@ -28,26 +25,22 @@ public class Feature1 {
         System.out.println(" REPORT 1: All Countries in the World (Organised by Population: Largest to Smallest)");
         System.out.println("================================================================================================================================");
 
-        // Fetch list of countries from database using private method
+        // Fetch list of countries from database using package-private method
         List<Country> countries = getCountriesByPopulationDescending();
 
-        // Print fetched countries using private formatting method
+        // Print fetched countries using package-private formatting method
         printCountryReport(countries);
     }
 
     /**
-     - Private method to fetch all countries from the database sorted by population descending.
-
-     - Joins the 'country' table with the 'city' table to fetch the Capital city name.
-
-     - Includes annotation to suppress IDE unresolved table inspection warnings.
-
+     * Package-private method to fetch all countries from the database sorted by population descending.
+     * Joins the 'country' table with the 'city' table to fetch the Capital city name.
+     * Includes annotation to suppress IDE unresolved table inspection warnings.
      *
-     -
-     @return List of Country objects ordered by population (highest first).
+     * @return List of Country objects ordered by population (highest first).
      */
     @SuppressWarnings("SqlResolve")
-    private List<Country> getCountriesByPopulationDescending() {
+    List<Country> getCountriesByPopulationDescending() {
         // Initialize an empty list to store Country objects
         List<Country> countryList = new ArrayList<>();
 
@@ -96,13 +89,12 @@ public class Feature1 {
     }
 
     /**
-     - Private helper method to print country records in a formatted table layout.
-
+     * Helper method to print country records in a formatted table layout.
+     * Changed from private to package-private to allow JUnit testing access.
      *
-     -
-     @param countries List of Country records to print.
+     * @param countries List of Country records to print.
      */
-    private void printCountryReport(List<Country> countries) {
+    void printCountryReport(List<Country> countries) {
         // Check if list is null or empty
         if (countries == null || countries.isEmpty()) {
             // Display notice when no data was found
@@ -119,8 +111,16 @@ public class Feature1 {
         // Print table divider line
         System.out.println("------------------------------------------------------------------------------------------------------------------------------");
 
+        // Create a counter variable before the loop
+        int printedCount = 0;
+
         // Iterate through each country and print formatted row
         for (Country country : countries) {
+
+            // Added safety check to skip null objects and prevent application crashes
+            if (country == null) {
+                continue;
+            }
 
             System.out.printf(rowFormat,
                     country.getCode(),
@@ -130,10 +130,13 @@ public class Feature1 {
                     country.getPopulation(),
                     country.getCapital()
             );
+
+            // Increase the count for every valid country printed
+            printedCount++;
         }
 
-        // Print footer summary with total count
+        // Print footer summary using the accurate printed count
         System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("Total Countries Listed: %d%n", countries.size());
+        System.out.printf("Total Countries Listed: %d%n", printedCount);
     }
 }
