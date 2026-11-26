@@ -1,6 +1,6 @@
 package com.globalpop.sprint1_features;
 
-import com.globalpop.DatabaseConnection;
+import com.globalpop.database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

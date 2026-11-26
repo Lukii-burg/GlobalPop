@@ -1,7 +1,7 @@
 
 package com.globalpop.sprint3.General_Population_Totals;
 
-import com.globalpop.DatabaseConnection;
+import com.globalpop.database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

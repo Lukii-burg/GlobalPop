@@ -1,6 +1,6 @@
 package com.globalpop.sprint3.Urban_vs_Rural_Population;
 
-import com.globalpop.DatabaseConnection;
+import com.globalpop.database.DatabaseConnection;
 import com.globalpop.model.PopulationLivingInVsOutOfCities;
 
 import java.sql.Connection;

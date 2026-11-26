@@ -1,6 +1,5 @@
 package com.globalpop.database;
 
-import com.globalpop.DatabaseConnection;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
