@@ -76,19 +76,26 @@ public class Feature8 {
     /**
      * Formats and prints the full continent city report.
      */
-    private void displayReport(List<City> cities, String continent) {
-        if (cities.isEmpty()) {
+    /**
+     * Formats and prints the full continent city report.
+     */
+    public void displayReport(List<City> cities, String continent) {
+        if (cities == null || cities.isEmpty()) {
             System.out.println("\nNo cities found for continent: \"" + continent + "\"");
             return;
         }
 
         System.out.println("\n==========================================================================================");
-        System.out.printf("Report 8: CITIES IN CONTINENT: %s (LARGEST TO SMALLEST POPULATION)%n", continent.toUpperCase());
+        System.out.printf("Report 8: CITIES IN CONTINENT: %s (LARGEST TO SMALLEST POPULATION)%n",
+                continent != null ? continent.toUpperCase() : "N/A");
         System.out.println("==========================================================================================");
         System.out.printf("%-25s | %-25s | %-20s | %-15s%n", "City", "Country", "District", "Population");
         System.out.println("------------------------------------------------------------------------------------------");
 
         for (City c : cities) {
+            if (c == null) {
+                continue;
+            }
             System.out.printf("%-25s | %-25s | %-20s | %,15d%n",
                     c.getCityName(),
                     c.getCountry(),
