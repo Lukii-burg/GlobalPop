@@ -54,7 +54,7 @@ public class Feature32 {
     /**
      * Retrieves estimated speaker totals and world-population percentages.
      */
-    private List<Language> getLanguageReports() throws SQLException {
+    List<Language> getLanguageReports() throws SQLException {
 
         List<Language> reports = new ArrayList<>();
 

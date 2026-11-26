@@ -41,7 +41,7 @@ public class Feature23 {
     /**
      * Retrieves population statistics for every continent.
      */
-    private List<PopulationLivingInVsOutOfCities> getPopulationReports()
+    List<PopulationLivingInVsOutOfCities> getPopulationReports()
             throws SQLException {
 
         List<PopulationLivingInVsOutOfCities> reports = new ArrayList<>();

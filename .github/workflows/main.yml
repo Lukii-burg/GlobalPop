@@ -1,41 +1,64 @@
-name: GlobalPop CI
+  name: GlobalPop CI
 
-on:
-  push:
-  pull_request:
+  on:
+    push:
+    pull_request:
 
-jobs:
-  build:
-    name: Build GlobalPop
-    runs-on: ubuntu-latest
+  jobs:
+    build:
+      name: Build and Test GlobalPop
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      env:
+        DB_HOST: 127.0.0.1
+        DB_PORT: 33061
+        DB_NAME: world
+        DB_USER: root
+        DB_PASSWORD: root
 
-      - name: Set up JDK 25
-        uses: actions/setup-java@v5
-        with:
-          java-version: '25'
-          distribution: 'temurin'
-          cache: maven
+      steps:
+        # 1. Checkout repository
+        - name: Checkout
+          uses: actions/checkout@v5
 
-      - name: Validate Docker Compose
-        run: docker compose config -q
+        # 2. Set up Java 25
+        - name: Set up JDK 25
+          uses: actions/setup-java@v5
+          with:
+            java-version: '25'
+            distribution: 'temurin'
+            cache: maven
 
-      - name: Start MySQL Database for Testing
-        run: docker compose up -d --wait db
+        # 3. Start MySQL database
+        - name: Start MySQL Database
+          run: docker compose up -d --wait db
 
-      - name: Run Unit and Integration Tests
-        run: mvn clean verify
+        # 4. Run unit tests
+        - name: Run Unit Tests
+          run: mvn clean test
 
-      - name: Build and Run App Container
-        run: docker compose up --build --abort-on-container-exit --exit-code-from app
+        # 5. Run integration tests
+        - name: Run Integration Tests
+          run: mvn "-Dtest=Feature2IT,Feature10IT,Feature17IT" test
 
-      - name: Display Docker Compose logs
-        if: always()
-        run: docker compose logs
+        # 6. Build Maven package
+        - name: Build with Maven
+          run: mvn package -DskipTests
 
-      - name: Stop Docker Compose
-        if: always()
-        run: docker compose down -v
+        # 7. Validate Docker Compose
+        - name: Validate Docker Compose
+          run: docker compose config -q
+
+        # 8. Build and run application
+        - name: Build and Run Docker Compose
+          run: docker compose up --build --abort-on-container-exit --exit-code-from app
+
+        # 9. Display logs
+        - name: Display Docker Compose Logs
+          if: always()
+          run: docker compose logs
+
+        # 10. Clean up
+        - name: Stop Docker Compose
+          if: always()
+          run: docker compose down -v

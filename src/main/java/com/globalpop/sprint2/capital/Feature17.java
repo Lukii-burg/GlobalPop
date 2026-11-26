@@ -33,7 +33,7 @@ public class Feature17 {
         }
     }
 
-    private List<CapitalCity> getCapitalCitiesByPopulationDescending()
+    List<CapitalCity> getCapitalCitiesByPopulationDescending()
             throws SQLException {
 
         List<CapitalCity> capitalCityList = new ArrayList<>();
