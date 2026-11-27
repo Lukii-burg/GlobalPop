@@ -124,7 +124,7 @@ public class Feature32 {
     /**
      * Displays language reports in descending speaker-count order.
      */
-    private void displayReport(List<Language> reports) {
+    void displayReport(List<Language> reports) {
 
         System.out.println("\n==========================================================================");
 

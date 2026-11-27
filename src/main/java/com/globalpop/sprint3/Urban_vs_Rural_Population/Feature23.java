@@ -97,7 +97,7 @@ public class Feature23 {
     /**
      * Displays continent population statistics.
      */
-    private void displayReport(
+    void displayReport(
             List<PopulationLivingInVsOutOfCities> reports) {
 
         System.out.println("\n================================================================================================================");
