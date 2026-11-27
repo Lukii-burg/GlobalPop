@@ -1,4 +1,3 @@
-
 package com.globalpop.sprint3.Urban_vs_Rural_Population;
 
 import com.globalpop.DatabaseConnection;
@@ -17,17 +16,15 @@ import java.util.List;
  */
 public class Feature25 {
 
+    /**
+     * Fetches the population data and prints the full country report.
+     */
     public void generateAndDisplayReport() {
         System.out.println("\nFeature 25: Population Living In vs. Out of Cities by Country");
 
         try {
             List<PopulationLivingInVsOutOfCities> reports =
                     getPopulationReports();
-
-            if (reports.isEmpty()) {
-                System.out.println("No country population data was found.");
-                return;
-            }
 
             displayReport(reports);
 
@@ -40,9 +37,9 @@ public class Feature25 {
     }
 
     /**
-     * Retrieves population statistics for every country.
+     * Retrieves population statistics for every country from the database.
      */
-    private List<PopulationLivingInVsOutOfCities> getPopulationReports()
+    public List<PopulationLivingInVsOutOfCities> getPopulationReports()
             throws SQLException {
 
         List<PopulationLivingInVsOutOfCities> reports = new ArrayList<>();
@@ -96,8 +93,13 @@ public class Feature25 {
     /**
      * Displays population statistics for each country.
      */
-    private void displayReport(
+    public void displayReport(
             List<PopulationLivingInVsOutOfCities> reports) {
+
+        if (reports == null || reports.isEmpty()) {
+            System.out.println("No country population data was found.");
+            return;
+        }
 
         System.out.println("\n======================================================================================================================");
 
@@ -113,19 +115,24 @@ public class Feature25 {
 
         System.out.println("----------------------------------------------------------------------------------------------------------------------");
 
+        int count = 0;
         for (PopulationLivingInVsOutOfCities report : reports) {
+            if (report == null) {
+                continue;
+            }
             System.out.printf(
                     "%-30s %,18d %,18d %11.2f%% %,18d %11.2f%%%n",
-                    report.getName(),
+                    report.getName() != null ? report.getName() : "N/A",
                     report.getTotalPopulation(),
                     report.getUrbanPopulation(),
                     report.getUrbanPercentage(),
                     report.getRuralPopulation(),
                     report.getRuralPercentage()
             );
+            count++;
         }
 
         System.out.println("======================================================================================================================");
-        System.out.printf("Total countries displayed: %d%n", reports.size());
+        System.out.printf("Total countries displayed: %d%n", count);
     }
 }

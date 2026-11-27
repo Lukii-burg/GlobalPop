@@ -1,7 +1,6 @@
-package com.globalpop.sprint3.General_Population_Totals;
+package com.globalpop.sprint3.Urban_vs_Rural_Population;
 
 import com.globalpop.model.PopulationLivingInVsOutOfCities;
-import com.globalpop.sprint3.Urban_vs_Rural_Population.Feature25;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
