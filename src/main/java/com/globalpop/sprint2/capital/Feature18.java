@@ -30,8 +30,12 @@ public class Feature18 {
         }
     }
 
-    private List<CapitalCity> getCapitalCitiesInContinent(String continent)
+    public List<CapitalCity> getCapitalCitiesInContinent(String continent)
             throws SQLException {
+
+        if (continent == null || continent.isBlank()) {
+            throw new IllegalArgumentException("Continent cannot be empty.");
+        }
 
         List<CapitalCity> capitalCities = new ArrayList<>();
 

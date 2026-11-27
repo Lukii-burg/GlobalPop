@@ -40,7 +40,7 @@ public class Feature24 {
     /**
      * Retrieves population statistics for every region.
      */
-    private List<PopulationLivingInVsOutOfCities> getPopulationReports()
+    public List<PopulationLivingInVsOutOfCities> getPopulationReports()
             throws SQLException {
 
         List<PopulationLivingInVsOutOfCities> reports = new ArrayList<>();

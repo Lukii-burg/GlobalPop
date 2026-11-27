@@ -27,7 +27,10 @@ public class Feature11 {
         }
     }
 
-    private List<City> getCitiesInDistrict(String district) throws SQLException {
+    public List<City> getCitiesInDistrict(String district) throws SQLException {
+        if (district == null || district.isBlank()) {
+            throw new IllegalArgumentException("District cannot be empty.");
+        }
         List<City> cities = new ArrayList<>();
 
         String query =
