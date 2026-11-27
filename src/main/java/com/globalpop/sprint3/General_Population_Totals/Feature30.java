@@ -45,7 +45,7 @@ public class Feature30 {
     /**
      * Calculates the total recorded city population in a district.
      */
-    private GeneralPopulationLookups getDistrictPopulation(
+    public GeneralPopulationLookups getDistrictPopulation(
             String district, String country) throws SQLException {
 
         String sql = """
@@ -79,20 +79,24 @@ public class Feature30 {
         return null;
     }
 
-        private void displayReport(GeneralPopulationLookups report) {
-
-            System.out.println("\n==============================================================");
-            System.out.println("             DISTRICT POPULATION REPORT");
-            System.out.println("==============================================================");
-
-            System.out.printf("%-35s %s%n",
-                    "District",
-                    report.getName());
-
-            System.out.printf("%-35s %,20d%n",
-                    "Population",
-                    report.getPopulation());
-
-            System.out.println("==============================================================");
+    public void displayReport(GeneralPopulationLookups report) {
+        if (report == null) {
+            System.out.println("\nNo population data found for this district.");
+            return;
         }
+
+        System.out.println("\n==============================================================");
+        System.out.println("             DISTRICT POPULATION REPORT");
+        System.out.println("==============================================================");
+
+        System.out.printf("%-35s %s%n",
+                "District",
+                report.getName() != null ? report.getName() : "N/A");
+
+        System.out.printf("%-35s %,20d%n",
+                "Population",
+                report.getPopulation());
+
+        System.out.println("==============================================================");
+    }
 }

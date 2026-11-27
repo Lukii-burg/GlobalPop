@@ -23,19 +23,21 @@ public class Feature26 {
         System.out.println(" REPORT 26: Total Population of the World");
         System.out.println("==================================================================");
 
-        // Fetch the total world population from the database
+        // Fetch the total world population from the database using package-private method
         long worldPopulation = getWorldPopulation();
 
-        // Print the fetched population
+        // Print the fetched population using package-private formatting method
         printPopulationReport(worldPopulation);
     }
 
     /**
-     * Private method to fetch the sum of all country populations in the database.
+     * Package-private method to fetch the sum of all country populations in the database.
+     * Includes annotation to suppress IDE unresolved table inspection warnings.
      *
      * @return The total world population as a long (to prevent integer overflow).
      */
-    private long getWorldPopulation() {
+    @SuppressWarnings("SqlResolve")
+    long getWorldPopulation() {
         long totalPopulation = 0;
 
         // SQL query to calculate the sum of the Population column across all countries
@@ -58,11 +60,13 @@ public class Feature26 {
     }
 
     /**
-     * Private helper method to print the population in a clean format.
+     * Helper method to print the population in a clean format.
+     * Changed from private to package-private to allow JUnit testing access.
      *
      * @param population The total population to print.
      */
-    private void printPopulationReport(long population) {
+    void printPopulationReport(long population) {
+        // Safety check for invalid or zero population data
         if (population <= 0) {
             System.out.println("No population data available.");
             return;
