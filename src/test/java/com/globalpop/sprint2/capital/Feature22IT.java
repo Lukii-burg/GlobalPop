@@ -3,7 +3,7 @@ package com.globalpop.sprint2.capital;
 import com.globalpop.model.CapitalCity;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +34,7 @@ public class Feature22IT {
      * sorted from largest to smallest population.
      */
     @Test
-    void testGetTopNCapitalCitiesInRegion() {
+    void testGetTopNCapitalCitiesInRegion() throws SQLException {
         // Arrange: Ask for the top 5 capital cities in Southeast Asia
         String region = "Southeast Asia";
         int limit = 5;
@@ -67,7 +67,7 @@ public class Feature22IT {
 
 
     @Test
-    void testQueryReturnsOnlyOneCapitalWhenLimitIsOne() {
+    void testQueryReturnsOnlyOneCapitalWhenLimitIsOne() throws SQLException {
         List<CapitalCity> capitals =
                 feature22.getTopNCapitalCitiesInRegion("Southeast Asia", 1);
 
@@ -76,7 +76,7 @@ public class Feature22IT {
     }
 
     @Test
-    void testUnknownRegionReturnsEmptyList() {
+    void testUnknownRegionReturnsEmptyList() throws SQLException {
         List<CapitalCity> capitals =
                 feature22.getTopNCapitalCitiesInRegion(
                         "Unknown Test Region", 5
@@ -87,7 +87,7 @@ public class Feature22IT {
     }
 
     @Test
-    void testQuerySupportsDifferentLetterCases() {
+    void testQuerySupportsDifferentLetterCases() throws SQLException {
         List<CapitalCity> upperCase =
                 feature22.getTopNCapitalCitiesInRegion("Southeast Asia", 5);
 
@@ -99,7 +99,7 @@ public class Feature22IT {
     }
 
     @Test
-    void testQueryWithZeroLimitReturnsEmptyList() {
+    void testQueryWithZeroLimitReturnsEmptyList() throws SQLException {
         List<CapitalCity> capitals =
                 feature22.getTopNCapitalCitiesInRegion("Southeast Asia", 0);
 

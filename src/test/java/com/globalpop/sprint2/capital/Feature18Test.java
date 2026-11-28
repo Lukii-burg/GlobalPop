@@ -2,7 +2,7 @@ package com.globalpop.sprint2.capital;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Feature18Test {
@@ -35,4 +35,37 @@ class Feature18Test {
                 () -> feature18.getCapitalCitiesInContinent("   ")
         );
     }
+
+
+    @Test
+    @DisplayName("Should display a message when no capital cities are found")
+    void testDisplayReportEmpty() {
+        java.io.ByteArrayOutputStream output =
+                new java.io.ByteArrayOutputStream();
+
+        java.io.PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new java.io.PrintStream(output));
+
+            feature18.displayReport(
+                    java.util.Collections.emptyList(),
+                    "Antarctica"
+            );
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String report = output.toString();
+
+        assertTrue(report.contains(
+                "No capital cities found for continent: Antarctica"
+        ));
+
+        assertFalse(report.contains(
+                "Total capital cities displayed:"
+        ));
+    }
+
 }

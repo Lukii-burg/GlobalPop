@@ -67,7 +67,7 @@ public class Feature18 {
         return capitalCities;
     }
 
-    private void displayReport(
+    void displayReport(
             List<CapitalCity> capitalCities, String continent) {
 
         if (capitalCities.isEmpty()) {

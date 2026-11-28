@@ -74,4 +74,42 @@ public class Feature20IT {
         System.out.println("\nIntegration Test Passed: Successfully retrieved and sorted the top " + capitalCities.size() + " capital cities in the world from the database!");
 
     }
+
+
+    @Test
+    void testGenerateAndDisplayReportEndToEnd() {
+        int limit = 5;
+
+        java.io.ByteArrayOutputStream output =
+                new java.io.ByteArrayOutputStream();
+
+        java.io.PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new java.io.PrintStream(output));
+
+            feature20.generateAndDisplayReport(limit);
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String report = output.toString();
+
+        assertTrue(
+                report.contains("REPORT 20: Top 5 Populated Capital Cities in the World"),
+                "Report heading should be displayed."
+        );
+
+        assertTrue(
+                report.contains("CAPITAL CITY"),
+                "Capital city table heading should be displayed."
+        );
+
+        assertTrue(
+                report.contains("Total Capital Cities Listed:"),
+                "Report should display the total number of capital cities."
+        );
+    }
+
 }

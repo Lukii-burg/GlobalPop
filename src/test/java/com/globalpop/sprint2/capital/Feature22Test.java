@@ -4,7 +4,10 @@ package com.globalpop.sprint2.capital;
 import com.globalpop.model.CapitalCity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -147,4 +150,43 @@ class Feature22Test {
 
         assertTrue(getOutput().contains("N/A"));
     }
+
+    @Test
+    void testRunHandlesDatabaseException() {
+
+        Feature22 failingFeature = new Feature22() {
+
+            @Override
+            public List<CapitalCity> getTopNCapitalCitiesInRegion(
+                    String region, int limit) throws SQLException {
+
+                throw new SQLException("Simulated database failure");
+            }
+        };
+
+        ByteArrayOutputStream errorOutput = new ByteArrayOutputStream();
+        PrintStream originalErr = System.err;
+
+        try {
+            System.setErr(new PrintStream(
+                    errorOutput,
+                    true,
+                    StandardCharsets.UTF_8
+            ));
+
+            failingFeature.run("Southeast Asia", 5);
+
+        } finally {
+            System.setErr(originalErr);
+        }
+
+        String errorMessage = errorOutput.toString(StandardCharsets.UTF_8);
+
+        assertTrue(errorMessage.contains(
+                "Database error while fetching Feature 22 data:"
+        ));
+
+        assertTrue(errorMessage.contains("Simulated database failure"));
+    }
+
 }

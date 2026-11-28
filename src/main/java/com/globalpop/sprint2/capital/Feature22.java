@@ -1,3 +1,4 @@
+
 package com.globalpop.sprint2.capital;
 
 import com.globalpop.database.DatabaseConnection;
@@ -27,10 +28,13 @@ public class Feature22 {
     }
 
     /**
-     * Executes Feature 22: Queries database and prints report for a given region and limit.
+     * Executes Feature 22 for a given region and limit.
      */
     public void run(String region, int limit) {
-        System.out.println("\n--- Feature 22: Top N Populated Capital Cities in a Region ---");
+
+        System.out.println(
+                "\n--- Feature 22: Top N Populated Capital Cities in a Region ---"
+        );
 
         if (region == null || region.isBlank()) {
             System.out.println("Region cannot be empty.");
@@ -42,27 +46,42 @@ public class Feature22 {
             return;
         }
 
-        List<CapitalCity> capitalCities = getTopNCapitalCitiesInRegion(region.trim(), limit);
-        displayReport(capitalCities, region.trim(), limit);
+        try {
+            List<CapitalCity> capitalCities =
+                    getTopNCapitalCitiesInRegion(region.trim(), limit);
+
+            displayReport(capitalCities, region.trim(), limit);
+
+        } catch (SQLException e) {
+            System.err.println(
+                    "Database error while fetching Feature 22 data: "
+                            + e.getMessage()
+            );
+        }
     }
 
     /**
-     * Queries the database for top N populated capital cities in a region.
+     * Queries the database for the top N populated capital cities in a region.
      *
      * @param region Name of the region
      * @param limit  Number of records to fetch
      * @return List of CapitalCity objects
+     * @throws SQLException if a database error occurs
      */
-    public List<CapitalCity> getTopNCapitalCitiesInRegion(String region, int limit) {
+    public List<CapitalCity> getTopNCapitalCitiesInRegion(
+            String region, int limit) throws SQLException {
+
         List<CapitalCity> capitalCities = new ArrayList<>();
 
-        // SQL Query joining country and city tables on the country's Capital ID
-        String query = "SELECT ci.Name AS CapitalCityName, co.Name AS CountryName, ci.Population AS CapitalPopulation " +
-                "FROM country co " +
-                "JOIN city ci ON co.Capital = ci.ID " +
-                "WHERE LOWER(co.Region) = LOWER(?) " +
-                "ORDER BY ci.Population DESC " +
-                "LIMIT ?";
+        String query =
+                "SELECT ci.Name AS CapitalCityName, "
+                        + "co.Name AS CountryName, "
+                        + "ci.Population AS CapitalPopulation "
+                        + "FROM country co "
+                        + "JOIN city ci ON co.Capital = ci.ID "
+                        + "WHERE LOWER(co.Region) = LOWER(?) "
+                        + "ORDER BY ci.Population DESC "
+                        + "LIMIT ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -71,28 +90,23 @@ public class Feature22 {
             stmt.setInt(2, limit);
 
             try (ResultSet rs = stmt.executeQuery()) {
+
                 while (rs.next()) {
+
                     CapitalCity capitalCity = new CapitalCity(
                             rs.getString("CapitalCityName"),
                             rs.getString("CountryName"),
                             rs.getInt("CapitalPopulation")
                     );
+
                     capitalCities.add(capitalCity);
                 }
             }
-
-        } catch (SQLException e) {
-            System.err.println("Database error while fetching Feature 22 data: " + e.getMessage());
         }
 
         return capitalCities;
     }
 
-    /**
-     * @param capitalCities List of capital cities
-     * @param region        Region name
-     * @param limit         Top N number
-     */
     /**
      * Formats and prints the capital city report.
      *
@@ -100,29 +114,59 @@ public class Feature22 {
      * @param region        Region name
      * @param limit         Top N number
      */
-    public void displayReport(List<CapitalCity> capitalCities, String region, int limit) {
+    public void displayReport(
+            List<CapitalCity> capitalCities,
+            String region,
+            int limit) {
+
         if (capitalCities == null || capitalCities.isEmpty()) {
-            System.out.println("\nNo capital cities found for region: \"" + region + "\"");
+            System.out.println(
+                    "\nNo capital cities found for region: \"" + region + "\""
+            );
             return;
         }
 
-        System.out.println("\n==========================================================================");
-        System.out.printf("Report 22: TOP %d POPULATED CAPITAL CITIES IN REGION: %s%n",
+        System.out.println(
+                "\n=========================================================================="
+        );
+
+        System.out.printf(
+                "Report 22: TOP %d POPULATED CAPITAL CITIES IN REGION: %s%n",
                 limit,
-                region != null ? region.toUpperCase() : "N/A");
-        System.out.println("==========================================================================");
-        System.out.printf("%-30s | %-25s | %-15s%n", "Capital City", "Country", "Population");
-        System.out.println("--------------------------------------------------------------------------");
+                region != null ? region.toUpperCase() : "N/A"
+        );
+
+        System.out.println(
+                "=========================================================================="
+        );
+
+        System.out.printf(
+                "%-30s | %-25s | %-15s%n",
+                "Capital City",
+                "Country",
+                "Population"
+        );
+
+        System.out.println(
+                "--------------------------------------------------------------------------"
+        );
 
         for (CapitalCity cc : capitalCities) {
+
             if (cc == null) {
                 continue;
             }
-            System.out.printf("%-30s | %-25s | %,15d%n",
+
+            System.out.printf(
+                    "%-30s | %-25s | %,15d%n",
                     cc.getCapitalCityName(),
                     cc.getCountry(),
-                    cc.getPopulation());
+                    cc.getPopulation()
+            );
         }
-        System.out.println("==========================================================================\n");
+
+        System.out.println(
+                "==========================================================================\n"
+        );
     }
 }

@@ -63,7 +63,7 @@ public class Feature17 {
         return capitalCityList;
     }
 
-    private void printCapitalCityReport(List<CapitalCity> capitalCities) {
+    void printCapitalCityReport(List<CapitalCity> capitalCities) {
 
         if (capitalCities.isEmpty()) {
             System.out.println("No capital city data available to display.");

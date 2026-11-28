@@ -3,7 +3,9 @@ package com.globalpop.sprint2.capital;
 import com.globalpop.model.CapitalCity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
@@ -192,4 +194,66 @@ class Feature21Test {
 
         assertDoesNotThrow(feature21::run);
     }
+
+
+    @Test
+    void testDisplayReportWithEmptyList() {
+        List<CapitalCity> emptyList = new ArrayList<>();
+
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new PrintStream(
+                    output, true, StandardCharsets.UTF_8
+            ));
+
+            Feature21.displayReport(emptyList, "Antarctica", 10);
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String report = output.toString(StandardCharsets.UTF_8);
+
+        assertTrue(report.contains(
+                "No capital cities found for continent: Antarctica"
+        ));
+
+        assertTrue(report.contains("Capital cities displayed: 0"));
+        assertTrue(report.contains("Report completed successfully."));
+    }
+
+    @Test
+    void testDisplayReportWithValidList() {
+        List<CapitalCity> capitals = List.of(
+                new CapitalCity("Tokyo", "Japan", 13960000),
+                new CapitalCity("Seoul", "South Korea", 9981000)
+        );
+
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new PrintStream(
+                    output, true, StandardCharsets.UTF_8
+            ));
+
+            Feature21.displayReport(capitals, "Asia", 10);
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String report = output.toString(StandardCharsets.UTF_8);
+
+        assertTrue(report.contains("Tokyo"));
+        assertTrue(report.contains("Seoul"));
+        assertTrue(report.contains("Japan"));
+        assertTrue(report.contains("South Korea"));
+        assertTrue(report.contains("Capital cities displayed: 2"));
+        assertTrue(report.contains("Report completed successfully."));
+        assertFalse(report.contains("No capital cities found"));
+    }
+
 }

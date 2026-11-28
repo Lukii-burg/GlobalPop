@@ -116,7 +116,7 @@ public class Feature21 {
     /**
      * Displays the capital city report.
      */
-    private static void displayReport(
+    static void displayReport(
             List<CapitalCity> capitalCities,
             String continent,
             int n) {
