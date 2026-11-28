@@ -107,4 +107,20 @@ public class Feature22IT {
         assertTrue(capitals.isEmpty());
     }
 
+
+    @Test
+    void testRunWithDefaultSettings() {
+        // Executes the default region and limit against the database.
+        assertDoesNotThrow(() -> feature22.run());
+    }
+
+    @Test
+    void testRunWithValidRegionAndLimit() {
+        // Executes the complete report workflow.
+        assertDoesNotThrow(
+                () -> feature22.run("Southeast Asia", 5)
+        );
+    }
+
+
 }
