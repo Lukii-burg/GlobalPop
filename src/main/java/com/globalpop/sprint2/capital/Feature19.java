@@ -1,4 +1,3 @@
-
 package com.globalpop.sprint2.capital;
 
 import com.globalpop.database.DatabaseConnection;
@@ -11,26 +10,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature 19: Displays all capital cities in a region, ordered by population.
+ */
 public class Feature19 {
 
     private static final String REGION_NAME = "Southeast Asia";
 
+    /**
+     * Runs Feature 19 using the default hardcoded region.
+     */
     public void run() {
+        run(REGION_NAME);
+    }
+
+    /**
+     * Queries and prints all capital cities in the specified region.
+     */
+    public void run(String region) {
         System.out.println("\n--- Feature 19: All Capital Cities in a Region ---");
-        System.out.println("Selected region: " + REGION_NAME);
+        System.out.println("Selected region: " + region);
 
         try {
-            List<CapitalCity> capitalCities =
-                    getCapitalCitiesInRegion(REGION_NAME);
-
-            displayReport(capitalCities, REGION_NAME);
-
+            List<CapitalCity> capitalCities = getCapitalCitiesInRegion(region);
+            displayReport(capitalCities, region);
         } catch (SQLException e) {
             System.err.println("Database error in Feature 19: " + e.getMessage());
         }
     }
 
-    private List<CapitalCity> getCapitalCitiesInRegion(String region)
+    /**
+     * Queries the database for all capital cities in a region, sorted from largest to smallest population.
+     */
+    public List<CapitalCity> getCapitalCitiesInRegion(String region)
             throws SQLException {
 
         List<CapitalCity> capitalCities = new ArrayList<>();
@@ -63,10 +75,13 @@ public class Feature19 {
         return capitalCities;
     }
 
-    private void displayReport(
+    /**
+     * Formats and prints the capital city report.
+     */
+    public void displayReport(
             List<CapitalCity> capitalCities, String region) {
 
-        if (capitalCities.isEmpty()) {
+        if (capitalCities == null || capitalCities.isEmpty()) {
             System.out.println(
                     "No capital cities found for region: " + region
             );
@@ -75,22 +90,27 @@ public class Feature19 {
 
         System.out.println("\n==========================================================================");
         System.out.printf("Report 19: CAPITAL CITIES IN REGION: %s%n",
-                region.toUpperCase());
+                region != null ? region.toUpperCase() : "N/A");
         System.out.println("Ordered by population: Largest to Smallest");
         System.out.println("==========================================================================");
         System.out.printf("%-30s | %-25s | %-15s%n",
                 "Capital City", "Country", "Population");
         System.out.println("--------------------------------------------------------------------------");
 
+        int count = 0;
+
         for (CapitalCity capitalCity : capitalCities) {
+            if (capitalCity == null) {
+                continue;
+            }
             System.out.printf("%-30s | %-25s | %,15d%n",
                     capitalCity.getCapitalCityName(),
                     capitalCity.getCountry(),
                     capitalCity.getPopulation());
+            count++;
         }
 
         System.out.println("==========================================================================");
-        System.out.printf("Total capital cities displayed: %d%n",
-                capitalCities.size());
+        System.out.printf("Total capital cities displayed: %d%n", count);
     }
 }
