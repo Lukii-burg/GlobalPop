@@ -1,41 +1,63 @@
+
 package com.globalpop.database;
 
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.DatabaseMetaData;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Integration test to verify that the application can successfully connect
- * to the live MySQL database using the configured environment variables or defaults.
- */
 public class DatabaseConnectionIT {
 
     @Test
-    void testGetConnectionSuccessfully() {
-        System.out.println("\n******************************************************************");
-        System.out.println("       RUNNING INTEGRATION TEST FOR DATABASE CONNECTION           ");
-        System.out.println("******************************************************************");
+    void testDatabaseConnectionIsSuccessful() throws Exception {
 
-        // Use try-with-resources to ensure the connection closes automatically after testing
         try (Connection connection = DatabaseConnection.getConnection()) {
 
-            // 1. Verify the connection object was successfully created
-            assertNotNull(connection, "Database connection should not be null.");
+            assertNotNull(
+                    connection,
+                    "Database connection must not be null"
+            );
 
-            // 2. Verify the connection is not closed
-            assertFalse(connection.isClosed(), "Database connection should remain open after creation.");
+            assertTrue(
+                    connection.isValid(5),
+                    "Database connection should be valid"
+            );
 
-            // 3. Ping the database to ensure the connection is truly active (2 second timeout)
-            assertTrue(connection.isValid(2), "Database connection should be active and valid.");
+            assertFalse(
+                    connection.isClosed(),
+                    "Database connection should remain open"
+            );
+        }
+    }
 
-            System.out.println("Database connection established successfully!");
+    @Test
+    void testConnectedDatabaseIsWorld() throws Exception {
 
-        } catch (SQLException e) {
-            // If any SQL error occurs (e.g., Docker is down, wrong port), fail the test explicitly
-            fail("Database connection failed. Ensure Docker is running. Exception: " + e.getMessage());
+        try (Connection connection = DatabaseConnection.getConnection()) {
+
+            assertEquals(
+                    "world",
+                    connection.getCatalog(),
+                    "Application should connect to the world database"
+            );
+        }
+    }
+
+    @Test
+    void testMySQLDatabaseProduct() throws Exception {
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+
+            DatabaseMetaData metadata = connection.getMetaData();
+
+            assertNotNull(metadata);
+
+            assertTrue(
+                    metadata.getDatabaseProductName().contains("MySQL"),
+                    "Database should be MySQL"
+            );
         }
     }
 }
