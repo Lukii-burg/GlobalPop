@@ -95,4 +95,10 @@ public class Feature19Test {
 
         feature19.displayReport(validCapitalCities, TEST_REGION);
     }
+
+    @Test
+    void testDisplayReportWithNullRegion() {
+        feature19.displayReport(validCapitalCities, null);
+    }
+
 }

@@ -61,4 +61,18 @@ public class Feature19IT {
         System.out.println("Integration Test Passed: Successfully retrieved and sorted "
                 + capitalCities.size() + " capital cities in " + region + "!");
     }
+
+
+    @Test
+    void testRunWithDefaultRegion() {
+        assertDoesNotThrow(() -> feature19.run());
+    }
+
+    @Test
+    void testRunWithExplicitRegion() {
+        assertDoesNotThrow(
+                () -> feature19.run("Southeast Asia")
+        );
+    }
+
 }

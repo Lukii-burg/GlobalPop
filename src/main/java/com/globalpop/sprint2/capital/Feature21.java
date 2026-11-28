@@ -16,6 +16,9 @@ public class Feature21 {
     // Hardcoded continent and number of capital cities
     private static final String CONTINENT = "Asia";
     private static final int N = 10;
+    List<CapitalCity> retrieveCapitalCities() throws SQLException {
+        return getTopPopulatedCapitalCities(CONTINENT, N);
+    }
 
     /**
      * Requirement 21:
@@ -27,7 +30,7 @@ public class Feature21 {
         try {
 
             List<CapitalCity> capitalCities =
-                    getTopPopulatedCapitalCities(CONTINENT, N);
+                    retrieveCapitalCities();
 
             displayReport(capitalCities, CONTINENT, N);
 

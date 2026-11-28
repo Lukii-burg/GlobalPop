@@ -119,4 +119,38 @@ class Feature21IT {
         assertDoesNotThrow(feature21::run, "Feature21.run() should complete without throwing uncaught exceptions.");
         System.out.println("Feature21.run() completed end-to-end.");
     }
+    /**add For Improve Code Cov**/
+
+    @Test
+    void testNullContinentThrowsException() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> Feature21.getTopPopulatedCapitalCities(null, 10)
+        );
+    }
+
+    @Test
+    void testBlankContinentThrowsException() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> Feature21.getTopPopulatedCapitalCities("   ", 10)
+        );
+    }
+
+    @Test
+    void testZeroLimitThrowsException() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> Feature21.getTopPopulatedCapitalCities("Asia", 0)
+        );
+    }
+
+    @Test
+    void testNegativeLimitThrowsException() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> Feature21.getTopPopulatedCapitalCities("Asia", -1)
+        );
+    }
+
 }

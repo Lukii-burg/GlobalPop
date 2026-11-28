@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -176,5 +177,19 @@ class Feature21Test {
         System.out.println("------------------------------------------------------------------------------------------");
         System.out.println("Capital cities displayed: " + displayedCount);
         System.out.println("Report completed successfully.");
+    }
+
+    @Test
+    void testRunHandlesDatabaseException() {
+
+        Feature21 feature21 = new Feature21() {
+
+            @Override
+            List<CapitalCity> retrieveCapitalCities() throws SQLException {
+                throw new SQLException("Simulated database failure");
+            }
+        };
+
+        assertDoesNotThrow(feature21::run);
     }
 }
