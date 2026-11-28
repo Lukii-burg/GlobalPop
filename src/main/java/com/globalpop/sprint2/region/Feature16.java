@@ -84,19 +84,24 @@ public class Feature16 {
     /**
      * Formats and prints the city report.
      */
-    private void displayReport(List<City> cities, String district, int limit) {
-        if (cities.isEmpty()) {
+    public void displayReport(List<City> cities, String district, int limit) {
+        if (cities == null || cities.isEmpty()) {
             System.out.println("\nNo cities found for district: \"" + district + "\"");
             return;
         }
 
         System.out.println("\n==========================================================================================");
-        System.out.printf("Report 16: TOP %d POPULATED CITIES IN DISTRICT: %s%n", limit, district.toUpperCase());
+        System.out.printf("Report 16: TOP %d POPULATED CITIES IN DISTRICT: %s%n",
+                limit,
+                district != null ? district.toUpperCase() : "N/A");
         System.out.println("==========================================================================================");
         System.out.printf("%-25s | %-25s | %-20s | %-15s%n", "City", "Country", "District", "Population");
         System.out.println("------------------------------------------------------------------------------------------");
 
         for (City c : cities) {
+            if (c == null) {
+                continue;
+            }
             System.out.printf("%-25s | %-25s | %-20s | %,15d%n",
                     c.getCityName(),
                     c.getCountry(),

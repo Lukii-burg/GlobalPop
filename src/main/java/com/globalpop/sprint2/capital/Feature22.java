@@ -93,19 +93,31 @@ public class Feature22 {
      * @param region        Region name
      * @param limit         Top N number
      */
-    private void displayReport(List<CapitalCity> capitalCities, String region, int limit) {
-        if (capitalCities.isEmpty()) {
+    /**
+     * Formats and prints the capital city report.
+     *
+     * @param capitalCities List of capital cities
+     * @param region        Region name
+     * @param limit         Top N number
+     */
+    public void displayReport(List<CapitalCity> capitalCities, String region, int limit) {
+        if (capitalCities == null || capitalCities.isEmpty()) {
             System.out.println("\nNo capital cities found for region: \"" + region + "\"");
             return;
         }
 
         System.out.println("\n==========================================================================");
-        System.out.printf("Report 22: TOP %d POPULATED CAPITAL CITIES IN REGION: %s%n", limit, region.toUpperCase());
+        System.out.printf("Report 22: TOP %d POPULATED CAPITAL CITIES IN REGION: %s%n",
+                limit,
+                region != null ? region.toUpperCase() : "N/A");
         System.out.println("==========================================================================");
         System.out.printf("%-30s | %-25s | %-15s%n", "Capital City", "Country", "Population");
         System.out.println("--------------------------------------------------------------------------");
 
         for (CapitalCity cc : capitalCities) {
+            if (cc == null) {
+                continue;
+            }
             System.out.printf("%-30s | %-25s | %,15d%n",
                     cc.getCapitalCityName(),
                     cc.getCountry(),
