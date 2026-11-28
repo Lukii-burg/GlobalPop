@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.List;
-
+import java.text.Collator;
+import java.text.Normalizer;
+import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -54,10 +56,34 @@ public class Feature25IT {
                 "Total population must equal city population plus non-city population.");
 
         // Assert 4: Verify alphabetical order across all countries
+        Collator collator = Collator.getInstance(Locale.ROOT);
+        collator.setStrength(Collator.PRIMARY);
+
+
+// Assert 4: Verify alphabetical ordering,
+// ignoring accents while preserving spaces.
         for (int i = 0; i < reports.size() - 1; i++) {
-            assertTrue(reports.get(i).getName().compareToIgnoreCase(reports.get(i + 1).getName()) <= 0,
-                    "Countries must be sorted alphabetically by name.");
+
+            String current = reports.get(i).getName();
+            String next = reports.get(i + 1).getName();
+
+            String normalizedCurrent = Normalizer.normalize(
+                    current, Normalizer.Form.NFD
+            ).replaceAll("\\p{M}", "");
+
+            String normalizedNext = Normalizer.normalize(
+                    next, Normalizer.Form.NFD
+            ).replaceAll("\\p{M}", "");
+
+            assertTrue(
+                    normalizedCurrent.compareToIgnoreCase(normalizedNext) <= 0,
+                    "Countries must be sorted alphabetically. " +
+                            "Incorrect order between '" + current +
+                            "' and '" + next + "'."
+            );
         }
+
+
 
         System.out.println("Integration Test Passed: Successfully retrieved urban vs rural population stats for "
                 + reports.size() + " countries!");
