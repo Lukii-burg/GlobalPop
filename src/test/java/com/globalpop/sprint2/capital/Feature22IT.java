@@ -64,4 +64,47 @@ public class Feature22IT {
         System.out.println("Integration Test Passed: Successfully retrieved and sorted top "
                 + capitalCities.size() + " capital cities in " + region + "!");
     }
+
+
+    @Test
+    void testQueryReturnsOnlyOneCapitalWhenLimitIsOne() {
+        List<CapitalCity> capitals =
+                feature22.getTopNCapitalCitiesInRegion("Southeast Asia", 1);
+
+        assertNotNull(capitals);
+        assertEquals(1, capitals.size());
+    }
+
+    @Test
+    void testUnknownRegionReturnsEmptyList() {
+        List<CapitalCity> capitals =
+                feature22.getTopNCapitalCitiesInRegion(
+                        "Unknown Test Region", 5
+                );
+
+        assertNotNull(capitals);
+        assertTrue(capitals.isEmpty());
+    }
+
+    @Test
+    void testQuerySupportsDifferentLetterCases() {
+        List<CapitalCity> upperCase =
+                feature22.getTopNCapitalCitiesInRegion("Southeast Asia", 5);
+
+        List<CapitalCity> lowerCase =
+                feature22.getTopNCapitalCitiesInRegion("southeast asia", 5);
+
+        assertEquals(upperCase.size(), lowerCase.size());
+        assertFalse(lowerCase.isEmpty());
+    }
+
+    @Test
+    void testQueryWithZeroLimitReturnsEmptyList() {
+        List<CapitalCity> capitals =
+                feature22.getTopNCapitalCitiesInRegion("Southeast Asia", 0);
+
+        assertNotNull(capitals);
+        assertTrue(capitals.isEmpty());
+    }
+
 }

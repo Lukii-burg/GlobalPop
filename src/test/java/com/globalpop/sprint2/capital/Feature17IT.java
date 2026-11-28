@@ -68,4 +68,45 @@ class Feature17IT {
             );
         }
     }
+
+
+    @Test
+    void testGenerateAndDisplayReport() {
+        Feature17 feature = new Feature17();
+
+        java.io.ByteArrayOutputStream output =
+                new java.io.ByteArrayOutputStream();
+
+        java.io.PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new java.io.PrintStream(
+                    output, true, java.nio.charset.StandardCharsets.UTF_8
+            ));
+
+            feature.generateAndDisplayReport();
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String report = output.toString(
+                java.nio.charset.StandardCharsets.UTF_8
+        );
+
+        assertTrue(report.contains(
+                "Report 17: ALL CAPITAL CITIES IN THE WORLD"
+        ));
+
+        assertTrue(report.contains("CAPITAL CITY"));
+        assertTrue(report.contains("COUNTRY"));
+        assertTrue(report.contains("POPULATION"));
+
+        assertTrue(report.contains("Total Capital Cities Listed:"));
+
+        assertFalse(report.contains(
+                "No capital city data available to display."
+        ));
+    }
+
 }

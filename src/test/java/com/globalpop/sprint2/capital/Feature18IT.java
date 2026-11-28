@@ -72,4 +72,50 @@ class Feature18IT {
                 "Uppercase and lowercase searches should return the same count"
         );
     }
+
+
+    @Test
+    @DisplayName("Should generate and display the Asia capital cities report")
+    void testRunDisplaysReport() {
+        java.io.ByteArrayOutputStream output =
+                new java.io.ByteArrayOutputStream();
+
+        java.io.PrintStream originalOut = System.out;
+
+        try {
+            System.setOut(new java.io.PrintStream(
+                    output,
+                    true,
+                    java.nio.charset.StandardCharsets.UTF_8
+            ));
+
+            feature18.run();
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String report = output.toString(
+                java.nio.charset.StandardCharsets.UTF_8
+        );
+
+        assertTrue(report.contains(
+                "Feature 18: All Capital Cities in a Continent"
+        ));
+
+        assertTrue(report.contains("Selected continent: Asia"));
+        assertTrue(report.contains(
+                "Report 18: CAPITAL CITIES IN CONTINENT: ASIA"
+        ));
+
+        assertTrue(report.contains("Capital City"));
+        assertTrue(report.contains("Country"));
+        assertTrue(report.contains("Population"));
+
+        assertTrue(report.contains("Total capital cities displayed:"));
+        assertFalse(report.contains(
+                "No capital cities found for continent: Asia"
+        ));
+    }
+
 }
